@@ -13,8 +13,8 @@ class DefaultController extends Controller
 {
     public function indexAction() {
         
-        $ue = $this->container->get('central_oauth.auth_user_entity');
-        $oar = $this->container->get('central_oauth.oauthrequestor');
+        $ue = $this->container->get('spirit_dev_oauth2_client.auth_user_entity');
+        $oar = $this->container->get('spirit_dev_oauth2_client.oauthrequestor');
         // $ug = $this->container->get('cb_client.oauth_user_grants');
         // $ug->hasExpired();
         $userEnity = $ue->getUserEntity();
@@ -24,7 +24,7 @@ class DefaultController extends Controller
             $userEnity['user_email'] === 'session_error' || 
             $userEnity['user_role'] === 'session_error') {
 
-            return $this->redirect($this->generateUrl('central_oauth_login'));
+            return $this->redirect($this->generateUrl('spirit_dev_oauth2_client_login'));
 
         }
 
@@ -52,8 +52,8 @@ class DefaultController extends Controller
         $username = $request->get('username');
         $password = $request->get('password');
 
-        $oar = $this->container->get('central_oauth.oauthrequestor');
-        $ue = $this->container->get('central_oauth.auth_user_entity');
+        $oar = $this->container->get('spirit_dev_oauth2_client.oauthrequestor');
+        $ue = $this->container->get('spirit_dev_oauth2_client.auth_user_entity');
 
         $req = $oar->getUserGrants($username, $password);
 
@@ -82,7 +82,7 @@ class DefaultController extends Controller
 
     public function checkTokenAction() {
 
-        $oar = $this->container->get('central_oauth.oauthrequestor');
+        $oar = $this->container->get('spirit_dev_oauth2_client.oauthrequestor');
 
         $req = $oar->checkStatus();
 
@@ -90,11 +90,11 @@ class DefaultController extends Controller
     }
 
     public function checkUserAction() {
-        $ue = $this->container->get('central_oauth.auth_user_entity');
+        $ue = $this->container->get('spirit_dev_oauth2_client.auth_user_entity');
         // $req = $ue->setUserEntity("1", "Roger", "roger@paul.fr", "USER");
         $req = $ue->getUserEntity();
         
-        // $oar = $this->container->get('central_oauth.oauthrequestor');
+        // $oar = $this->container->get('spirit_dev_oauth2_client.oauthrequestor');
         // $req = $oar->getTokenDateOut();
         // $req = $oar->getRemoteUser("test");
 
@@ -103,7 +103,7 @@ class DefaultController extends Controller
 
     public function deleteUserAction() {
 
-        $ue = $this->container->get('central_oauth.auth_user_entity');
+        $ue = $this->container->get('spirit_dev_oauth2_client.auth_user_entity');
         $req = $ue->deleteSessionVars();
         return new JsonResponse($req, 200); 
     }

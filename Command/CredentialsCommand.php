@@ -12,13 +12,13 @@ class CredentialsCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('oauth2:credentials')
+            ->setName('spirit-dev:oauth2:credentials')
             ->setDescription('Executes OAuth2 Credentials grant');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $credentialsClient = $this->getContainer()->get('central_oauth.credentials_client');
+        $credentialsClient = $this->getContainer()->get('spirit_dev_oauth2_client.credentials_client');
         $accessToken = $credentialsClient->getAccessToken();
         $output->writeln(sprintf('Obtained Access Token: <info>%s</info>', $accessToken));
 

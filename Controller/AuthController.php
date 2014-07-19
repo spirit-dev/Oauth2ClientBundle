@@ -16,7 +16,7 @@ use OAuth2;
 class AuthController extends Controller
 {
     /*
-     * //////@Route("/authorize", name="central_oauth_auth")
+     * //////@Route("/authorize", name="spirit_dev_oauth2_client_auth")
      *
      * public function authAction(Request $request)
      * {
@@ -31,12 +31,12 @@ class AuthController extends Controller
      */
 
     /**
-     * @Route("/index", name="central_oauth_homepage")
+     * @Route("/index", name="spirit_dev_oauth2_client_homepage")
      */
     public function indexAction() {
         
-        $ue = $this->container->get('central_oauth.auth_user_entity');
-        $oar = $this->container->get('central_oauth.oauthrequestor');
+        $ue = $this->container->get('spirit_dev_oauth2_client.auth_user_entity');
+        $oar = $this->container->get('spirit_dev_oauth2_client.oauthrequestor');
         // $ug = $this->container->get('cb_client.oauth_user_grants');
         // $ug->hasExpired();
         $userEnity = $ue->getUserEntity();
@@ -46,11 +46,11 @@ class AuthController extends Controller
             $userEnity['user_email'] === 'session_error' || 
             $userEnity['user_role'] === 'session_error') {
 
-            return $this->redirect($this->generateUrl('central_oauth_login'));
+            return $this->redirect($this->generateUrl('spirit_dev_oauth2_client_login'));
 
         }
 
-        return $this->render('CentralOAuthBundle:Default:index.html.twig', 
+        return $this->render('SpiritDevOAuth2ClientBundle:Default:index.html.twig', 
             array(
                 'user' => $ue->getUserEntity(),
                 'access_token' => $oar->getAccessToken(),
@@ -60,15 +60,15 @@ class AuthController extends Controller
     }
     
     /**
-     * @Route("/login", name="central_oauth_login")
+     * @Route("/login", name="spirit_dev_oauth2_client_login")
      */
     public function loginAction() {
 
-        return $this->render('CentralOAuthBundle:Security:login.html.twig');
+        return $this->render('SpiritDevOAuth2ClientBundle:Security:login.html.twig');
     }
 
     /**
-     * @Route("/logout", name="central_oauth_logout")
+     * @Route("/logout", name="spirit_dev_oauth2_client_logout")
      */
     public function logoutAction() {
 
@@ -76,15 +76,15 @@ class AuthController extends Controller
     }
 
     /**
-     * @Route("/auth_test", name="central_oauth_auth_test")
+     * @Route("/auth_test", name="spirit_dev_oauth2_client_auth_test")
      */
     public function passwordGrantAction(Request $request) {
 
         $username = $request->get('username');
         $password = $request->get('password');
 
-        $oar = $this->container->get('central_oauth.oauthrequestor');
-        $ue = $this->container->get('central_oauth.auth_user_entity');
+        $oar = $this->container->get('spirit_dev_oauth2_client.oauthrequestor');
+        $ue = $this->container->get('spirit_dev_oauth2_client.auth_user_entity');
 
         $req = $oar->getUserGrants($username, $password);
 
@@ -112,11 +112,11 @@ class AuthController extends Controller
     }
 
     /**
-     * @Route("/check_remote_token", name="central_oauth_check_remote_token")
+     * @Route("/check_remote_token", name="spirit_dev_oauth2_client_check_remote_token")
      */
     public function checkTokenAction() {
 
-        $oar = $this->container->get('central_oauth.oauthrequestor');
+        $oar = $this->container->get('spirit_dev_oauth2_client.oauthrequestor');
 
         $req = $oar->checkStatus();
 
@@ -124,14 +124,14 @@ class AuthController extends Controller
     }
 
     /**
-     * @Route("/check_remote_user", name="central_oauth_check_remote_user")
+     * @Route("/check_remote_user", name="spirit_dev_oauth2_client_check_remote_user")
      */
     public function checkUserAction() {
-        $ue = $this->container->get('central_oauth.auth_user_entity');
+        $ue = $this->container->get('spirit_dev_oauth2_client.auth_user_entity');
         // $req = $ue->setUserEntity("1", "Roger", "roger@paul.fr", "USER");
         $req = $ue->getUserEntity();
         
-        // $oar = $this->container->get('central_oauth.oauthrequestor');
+        // $oar = $this->container->get('spirit_dev_oauth2_client.oauthrequestor');
         // $req = $oar->getTokenDateOut();
         // $req = $oar->getRemoteUser("test");
 
@@ -139,11 +139,11 @@ class AuthController extends Controller
     }
 
     /**
-     * @Route("/delete_remote_user", name="central_oauth_delete_remote_user")
+     * @Route("/delete_remote_user", name="spirit_dev_oauth2_client_delete_remote_user")
      */
     public function deleteUserAction() {
 
-        $ue = $this->container->get('central_oauth.auth_user_entity');
+        $ue = $this->container->get('spirit_dev_oauth2_client.auth_user_entity');
         $req = $ue->deleteSessionVars();
         return new JsonResponse($req, 200); 
     }
