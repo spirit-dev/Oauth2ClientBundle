@@ -13,13 +13,13 @@
     ],
     "require": {
         "php": ">=5.3.2",
-        "symfony/framework-bundle":         ">=2.1,<2.3-dev",
+        "symfony/framework-bundle":         "~2.4",
         "twig/twig":                        "*",
         "doctrine/doctrine-bundle":         "*"
     },
     "autoload": {
         "psr-0": { "Spirit-Dev\\Bundle\\OAuth2ClientBundle": "" }
     },
-    "target-dir": "Spirit-Dev/Bundle/OAuth2Bundle",
+    "target-dir": "Spirit-Dev/Bundle/OAuth2ClientBundle",
     "minimum-stability": "dev"
 } 
