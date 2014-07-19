@@ -10,6 +10,9 @@ services:
             - [setUserGrantsManager, ["@spirit_dev_oauth2_client.oauth_user_grants"]]
             - [setUserEntity, ["@spirit_dev_oauth2_client.auth_user_entity"]]
             - [setBroswer, ["@buzz"]]
+    # spirit_dev_oauth2_client.oauthrequestor:
+    #     class: %spirit_dev_oauth2_client.oauthrequestor.class%
+    #     arguments: ["http://dev.spiritapi.com/oauth/v2/token", "http://dev.spiritapi.com/api/v1/user", "4_4plm7ubl1ticsk000swg8w4wc8k4wks84oc48wgos0oo8ck4o4", "297ncb78krr48owsgwkgwkwk4cw8o00kk0ogc0woock4wo00s8", "http://dev.simpletodo.com/", "@spirit_dev_oauth2_client.oauth_user_grants", "@spirit_dev_oauth2_client.auth_user_entity", "@buzz"]
        # arguments: [@service_id, "plain_value", %parameter%]
     spirit_dev_oauth2_client.oauth_user_grants:
         class: %spirit_dev_oauth2_client.oauth_user_grants.class%

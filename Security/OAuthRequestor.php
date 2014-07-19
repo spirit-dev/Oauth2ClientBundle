@@ -18,6 +18,21 @@ class OAuthRequestor {
 	protected $browser = null;
 	protected $userEntity = null;
 
+	public function __construct($token_uri, $get_user_uri, $client_id, $client_secret, 
+		$redirect_uri, OAuthUserGrants $userGrants, $userEntity, $browser) {
+
+		$this->token_uri = $token_uri;
+		$this->get_user_uri = $get_user_uri;
+		$this->client_id = $client_id;
+		$this->client_secret = $client_secret;
+		$this->redirect_uri = $redirect_uri;
+
+		$this->userGrants = $userGrants;
+		$this->browser = $browser;
+		$this->userEntity = $userEntity;
+
+	}
+
 	public function setUserGrantsManager(OAuthUserGrants $userGrants) {
 
 		$this->userGrants = $userGrants;
