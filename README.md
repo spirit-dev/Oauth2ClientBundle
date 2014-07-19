@@ -63,12 +63,12 @@ Add SpiritDevOAuth2ClientBundle settings in app/config/config.yml:
 
 ``` yaml
 # app/config/config.yml
-fos_oauth_server:
-    db_driver: orm       # Driver availables: orm, mongodb, or propel
-    client_class:        Acme\ApiBundle\Entity\Client
-    access_token_class:  Acme\ApiBundle\Entity\AccessToken
-    refresh_token_class: Acme\ApiBundle\Entity\RefreshToken
-    auth_code_class:     Acme\ApiBundle\Entity\AuthCode
+spirit_dev_o_auth2_client:
+    token_uri: "http://your.api.com/oauth/v2/token"
+    get_user_uri: "http://your.api.com/api/v1/user"
+    client_id: "ExampleOfClientIDProvidedByYourAPI.com"
+    client_secret: "ExampleOfClientSecretProvidedByYourAPI.com"
+    redirect_uri: "http://your.local.app/"
 ```
 
 ## Simulating a token granting (comming soon)
