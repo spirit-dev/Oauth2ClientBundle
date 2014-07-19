@@ -1,8 +1,8 @@
 {
-    "name": "spirit-dev/oauth2-bundle",
+    "name": "spirit-dev/oauth2-client-bundle",
     "type": "symfony-bundle",
-    "description": "Symfony OAuth2 Bundle",
-    "keywords": ["Spirit-Dev", "OAuth2", "Auto provider", "api", "web service"],
+    "description": "Symfony OAuth2 Bundle client side",
+    "keywords": ["Spirit-Dev", "OAuth2", "Auto provider", "client", "security"],
     "license": "GPL-v2",
     "authors": [
         {
@@ -18,7 +18,7 @@
         "doctrine/doctrine-bundle":         "*"
     },
     "autoload": {
-        "psr-0": { "Spirit-Dev\\Bundle\\OAuth2Bundle": "" }
+        "psr-0": { "Spirit-Dev\\Bundle\\OAuth2ClientBundle": "" }
     },
     "target-dir": "Spirit-Dev/Bundle/OAuth2Bundle",
     "minimum-stability": "dev"
