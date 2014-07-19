@@ -23,6 +23,14 @@ class Configuration implements ConfigurationInterface
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
         // more information on that topic.
+        $rootNode
+            ->children()
+            ->scalarNode('token_uri')->isRequired()->cannotBeEmpty()->end()
+            ->scalarNode('get_user_uri')->isRequired()->cannotBeEmpty()->end()
+            ->scalarNode('client_id')->isRequired()->cannotBeEmpty()->end()
+            ->scalarNode('client_secret')->isRequired()->cannotBeEmpty()->end()
+            ->scalarNode('redirect_uri')->isRequired()->cannotBeEmpty()->end()
+            ->end();
 
         return $treeBuilder;
     }
