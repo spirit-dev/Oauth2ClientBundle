@@ -55,11 +55,8 @@ Import the routing.yml configuration file in app/config/routing.yml:
 
 ``` yaml
 # app/config/routing.yml
-fos_oauth_server_token:
-    resource: "@SpiritDevOAuth2ClientBundle/Resources/config/routing/token.xml"
-
-fos_oauth_server_authorize:
-    resource: "@SpiritDevOAuth2ClientBundle/Resources/config/routing/authorize.xml"
+spirit_dev_oauth2_client_o_auth:
+    resource: "@SpiritDevOAuth2ClientBundle/Resources/config/routing.yml"
 ```
 
 Add SpiritDevOAuth2ClientBundle settings in app/config/config.yml:
