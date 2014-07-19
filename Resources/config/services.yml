@@ -1,0 +1,17 @@
+parameters:
+    central_oauth.oauthrequestor.class: SpiritDev\Bundle\OAuth2ClientBundle\Security\OAuthRequestor
+    central_oauth.oauth_user_grants.class: SpiritDev\Bundle\OAuth2ClientBundle\Security\OAuthUserGrants
+    central_oauth.auth_user_entity.class: SpiritDev\Bundle\OAuth2ClientBundle\Security\OAuthUserEntity
+
+services:
+    central_oauth.oauthrequestor:
+        class: %central_oauth.oauthrequestor.class%
+        calls:
+            - [setUserGrantsManager, ["@central_oauth.oauth_user_grants"]]
+            - [setUserEntity, ["@central_oauth.auth_user_entity"]]
+            - [setBroswer, ["@buzz"]]
+       # arguments: [@service_id, "plain_value", %parameter%]
+    central_oauth.oauth_user_grants:
+        class: %central_oauth.oauth_user_grants.class%
+    central_oauth.auth_user_entity:
+        class: %central_oauth.auth_user_entity.class%

@@ -1,0 +1,69 @@
+{% extends "SimpleTodoAppBundle::layout.html.twig" %}
+ 
+{% block title %}
+  Welcome - {{ parent() }}
+{% endblock %}
+
+{% block perso_css %}
+
+  {# if app.environment == "prod" %}
+	{% stylesheets 
+	  'bundles/simpletodoapp/css/main.min.css'
+	filter='cssrewrite' %}
+	  <link rel="stylesheet" href="{{ asset_url }}" />
+	{% endstylesheets %}
+  {% else %}
+	{% stylesheets 
+	  'bundles/simpletodoapp/css/main.css'
+	filter='cssrewrite' %}
+	  <link rel="stylesheet" href="{{ asset_url }}" />
+	{% endstylesheets %}
+  {% endif #}
+
+  <link rel="stylesheet" href="{{ asset('bundles/simpletodoapp/css/main.css') }}">
+
+{% endblock %}
+
+
+{% block perso_js %}
+  {# if app.environment == "prod" %}
+	{% javascripts 
+	  '@SimpleTodoAppBundle/Resources/public/js/iframetest.min.js'
+	%}
+	  <script type="text/javascript" src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+  {% else %}
+	{% javascripts 
+	  '@SimpleTodoAppBundle/Resources/public/js/iframetest.js'
+	%}
+	  <script type="text/javascript" src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+  {% endif #}
+
+  {#<script src="{{ asset('bundles/simpletodoapp/js/iframetest.js') }}" type="text/javascript" charset="utf-8" async defer></script>#}
+
+{% endblock %}
+
+
+{% block body_content %}
+
+	<div class="jumbotron">
+	  {#<h1>Jumbotron heading</h1>
+	  <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+	  <p><a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a></p>#}
+
+	  <form class="form-signin" id="form_login" action="" role="form">
+		<h2 class="form-signin-heading">Please sign in</h2>
+		<input id="login_usr" type="text" class="form-control" placeholder="Username" required autofocus>
+		<input id="login_pw" type="password" class="form-control" placeholder="Password" required>
+		<label class="checkbox">
+		  <input type="checkbox" value="remember-me"> Remember me
+		</label>
+		<button class="btn btn-lg btn-primary btn-block">Sign in</button>
+	  </form>
+
+	</div>
+
+{% endblock %}
+
+

@@ -1,0 +1,3 @@
+cb_api_auth:
+    resource: "@SpiritDevOAuth2ClientBundle/Controller/AuthController.php"
+    type: annotation
