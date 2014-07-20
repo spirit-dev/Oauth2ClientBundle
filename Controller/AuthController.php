@@ -13,13 +13,16 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use OAuth2;
 
 
-class AuthController extends Controller
-{
+class AuthController extends Controller {
+
+    private $serviceUserEntity = 'spirit_dev_oauth2_client.auth_user_entity';
+    private $serviceOAuthRequestor = 'spirit_dev_oauth2_client.oauthrequestor';
+    private $sessionErrorString = 'session_error';
+
     /*
      * //////@Route("/authorize", name="spirit_dev_oauth2_client_auth")
      *
-     * public function authAction(Request $request)
-     * {
+     * public function authAction(Request $request) {
      *     $authorizeClient = $this->container->get('cb_client.authorize_client');
      *     if (!$request->query->get('code')) {
      *         return new RedirectResponse($authorizeClient->getAuthenticationUrl());
@@ -35,16 +38,16 @@ class AuthController extends Controller
      */
     public function indexAction() {
         
-        $ue = $this->container->get('spirit_dev_oauth2_client.auth_user_entity');
-        $oar = $this->container->get('spirit_dev_oauth2_client.oauthrequestor');
+        $ue = $this->container->get($this->serviceUserEntity);
+        $oar = $this->container->get($this->serviceOAuthRequestor);
         // $ug = $this->container->get('cb_client.oauth_user_grants');
         // $ug->hasExpired();
         $userEnity = $ue->getUserEntity();
 
-        if ($userEnity['user_id'] === 'session_error' || 
-            $userEnity['user_username'] === 'session_error' || 
-            $userEnity['user_email'] === 'session_error' || 
-            $userEnity['user_role'] === 'session_error') {
+        if ($userEnity['user_id'] === $sessionErrorString || 
+            $userEnity['user_username'] === $sessionErrorString || 
+            $userEnity['user_email'] === $sessionErrorString || 
+            $userEnity['user_role'] === $sessionErrorString) {
 
             return $this->redirect($this->generateUrl('spirit_dev_oauth2_client_login'));
 
@@ -83,8 +86,8 @@ class AuthController extends Controller
         $username = $request->get('username');
         $password = $request->get('password');
 
-        $oar = $this->container->get('spirit_dev_oauth2_client.oauthrequestor');
-        $ue = $this->container->get('spirit_dev_oauth2_client.auth_user_entity');
+        $oar = $this->container->get($this->serviceOAuthRequestor);
+        $ue = $this->container->get($this->serviceUserEntity);
 
         $req = $oar->getUserGrants($username, $password);
 
@@ -116,7 +119,7 @@ class AuthController extends Controller
      */
     public function checkTokenAction() {
 
-        $oar = $this->container->get('spirit_dev_oauth2_client.oauthrequestor');
+        $oar = $this->container->get($this->serviceOAuthRequestor);
 
         $req = $oar->checkStatus();
 
@@ -127,11 +130,11 @@ class AuthController extends Controller
      * @Route("/check_remote_user", name="spirit_dev_oauth2_client_check_remote_user")
      */
     public function checkUserAction() {
-        $ue = $this->container->get('spirit_dev_oauth2_client.auth_user_entity');
+        $ue = $this->container->get($this->serviceUserEntity);
         // $req = $ue->setUserEntity("1", "Roger", "roger@paul.fr", "USER");
         $req = $ue->getUserEntity();
         
-        // $oar = $this->container->get('spirit_dev_oauth2_client.oauthrequestor');
+        // $oar = $this->container->get($this->serviceOAuthRequestor);
         // $req = $oar->getTokenDateOut();
         // $req = $oar->getRemoteUser("test");
 
@@ -143,7 +146,7 @@ class AuthController extends Controller
      */
     public function deleteUserAction() {
 
-        $ue = $this->container->get('spirit_dev_oauth2_client.auth_user_entity');
+        $ue = $this->container->get($this->serviceUserEntity);
         $req = $ue->deleteSessionVars();
         return new JsonResponse($req, 200); 
     }

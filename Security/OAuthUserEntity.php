@@ -4,10 +4,12 @@ namespace SpiritDev\Bundle\OAuth2ClientBundle\Security;
 
 class OAuthUserEntity {
 
-	protected $user_id;
-    protected $user_username;
-    protected $user_email;
-    protected $user_role;
+	protected $userId;
+    protected $userUsername;
+    protected $userEmail;
+    protected $userRole;
+
+    private $sessionErrorString = "session_error";
 
     public function setUserEntity($id, $username, $email, $role) {
         
@@ -37,38 +39,26 @@ class OAuthUserEntity {
     }
 
     private function serializeSet($id, $username, $email, $role) {
-        // set local var
-        $this->user_id = $id;
-        $this->user_username = $username;
-        $this->user_email = $email;
-        $this->user_role = $role;
-
-        
-        // if(!session_start()) {
-        //     session_start();
-        // }
-
-        // set Session vars
-        $this->setId($this->user_id);
-        $this->setUsername($this->user_username);
-        $this->setEmail($this->user_email);
-        $this->setRole($this->user_role);       
+        // set Session vars & local vars
+        $this->setId($id);
+        $this->setUsername($username);
+        $this->setEmail($email);
+        $this->setRole($role);       
     }
 
     private function serializeGet() {
 
-        $userEntity = array(
+        return array(
             "user_id" => $this->getId(),
             "user_username" => $this->getUsername(),
             "user_email" => $this->getEmail(),
             "user_role" => $this->getRole()
         );
-
-        return $userEntity;
     }
 
-    private function setId($user_id) {
-        $_SESSION['user_id'] = $this->user_id;
+    private function setId($id) {
+        $this->userId = $id;
+        $_SESSION['user_id'] = $id;
     }
     
     private function getId() {
@@ -76,12 +66,13 @@ class OAuthUserEntity {
             return $_SESSION['user_id'];
         }
         else {
-            return "session_error";
+            return $this->sessionErrorString;
         }
     }
 
     private function setUsername($username) {
-        $_SESSION['user_username'] = $this->user_username;
+        $this->userUsername = $username;
+        $_SESSION['user_username'] = $username;
     }
     
     public function getUsername() {
@@ -89,12 +80,13 @@ class OAuthUserEntity {
             return $_SESSION['user_username'];
         }
         else {
-            return "session_error";
+            return $this->sessionErrorString;
         }
     }
 
     private function setEmail($email) {
-        $_SESSION['user_email'] = $this->user_email;
+        $this->userEmail = $email;
+        $_SESSION['user_email'] = $email;
     }
     
     private function getEmail() {
@@ -102,12 +94,13 @@ class OAuthUserEntity {
             return $_SESSION['user_email'];
         }
         else {
-            return "session_error";
+            return $this->sessionErrorString;
         }
     }
 
     private function setRole($role) {
-        $_SESSION['user_role'] = $this->user_role;
+        $this->userRole = $role;
+        $_SESSION['user_role'] = $role;
     }
     
     private function getRole() {
@@ -115,7 +108,7 @@ class OAuthUserEntity {
             return $_SESSION['user_role'];
         }
         else {
-            return "session_error";
+            return $this->sessionErrorString;
         }
     }
 

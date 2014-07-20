@@ -7,22 +7,24 @@ use \DateInterval;
 
 class OAuthUserGrants {
 
-    protected $access_token;
-    protected $refresh_token;
+    protected $accessToken;
+    protected $refreshToken;
     protected $scope;
-    protected $expires_in;
-    protected $token_type; 
+    protected $expiresIn;
+    protected $tokenType; 
 
-    protected $date_income;
-    protected $date_outcome;
+    protected $dateIncome;
+    protected $dateOutcome;
 
-    public function setGrants($access_token, $refresh_token, $scope, $expires_in, $token_type) {
+    protected $sessionErrorString = "session_error";
 
-        $this->access_token = $access_token;
-        $this->refresh_token = $refresh_token;
+    public function setGrants($accessToken, $refreshToken, $scope, $expiresIn, $tokenType) {
+
+        $this->accessToken = $accessToken;
+        $this->refreshToken = $refreshToken;
         $this->scope = $scope;
-        $this->expires_in = $expires_in;
-        $this->token_type = $token_type;
+        $this->expiresIn = $expiresIn;
+        $this->tokenType = $tokenType;
 
         $this->setTimeout();
 
@@ -34,17 +36,18 @@ class OAuthUserGrants {
 
         $this->getSessionVars();
         
-        $date1 = new DateTime("now");
-        if ($this->date_outcome == "session_error") {
+        if ($this->dateOutcome == $sessionErrorString) {
             return true;
         }
-        $date2 = new DateTime($this->date_outcome->format('Y-m-d H:i:s'));
+
+        $date1 = new DateTime("now");
+        $date2 = new DateTime($this->dateOutcome->format('Y-m-d H:i:s'));
 
         if ($date1 < $date2) {
             return true;
         }
         else {
-            return true;
+            return false;
         }
     }
 
@@ -52,95 +55,91 @@ class OAuthUserGrants {
         
         $this->getSessionVars();
         
-        return $this->access_token;
+        return $this->accessToken;
     }
 
     public function getRefreshToken() {
         
         $this->getSessionVars();
         
-        return $this->refresh_token;
+        return $this->refreshToken;
     }
 
     public function getDateOutcome() {
         $this->getSessionVars();
-        if ($this->date_outcome != "session_error") {
-            return $this->date_outcome->format('Y-m-d H:i:s');
+        if ($this->dateOutcome != $sessionErrorString) {
+            return $this->dateOutcome->format('Y-m-d H:i:s');
         }
         else {
-            return $this->date_outcome;
+            return $this->dateOutcome;
         }
     }
 
     private function setTimeout() {
 
-        $this->date_income = new DateTime();
-        $this->date_outcome = $this->date_income->add(new DateInterval('PT'.$this->expires_in.'S'));
+        $this->dateIncome = new DateTime();
+        $this->dateOutcome = $this->dateIncome->add(new DateInterval('PT'.$this->expiresIn.'S'));
 
     }
 
     private function setSessionVars() {
-        // if(!session_start()) {
-     //        session_start();
-     //    }
-        $_SESSION['oaug_access_token'] = $this->access_token;
-        $_SESSION['oaug_refresh_token'] = $this->refresh_token;
+        $_SESSION['oaug_access_token'] = $this->accessToken;
+        $_SESSION['oaug_refresh_token'] = $this->refreshToken;
         $_SESSION['oaug_scope'] = $this->scope;
-        $_SESSION['oaug_expires_in'] = $this->expires_in;
-        $_SESSION['oaug_token_type'] = $this->token_type;
-        $_SESSION['oaug_date_income'] = $this->date_income;
-        $_SESSION['oaug_date_outcome'] = $this->date_outcome;
+        $_SESSION['oaug_expires_in'] = $this->expiresIn;
+        $_SESSION['oaug_token_type'] = $this->tokenType;
+        $_SESSION['oaug_date_income'] = $this->dateIncome;
+        $_SESSION['oaug_date_outcome'] = $this->dateOutcome;
     }
 
     private function getSessionVars() {
-        // session_start();
         if(!isset($_SESSION['oaug_access_token'])) {
-            $this->access_token = "session_error";
+            $this->accessToken = $sessionErrorString;
         }
         else {
-            $this->access_token = $_SESSION['oaug_access_token'];
+            $this->accessToken = $_SESSION['oaug_access_token'];
         }
 
         if(!isset($_SESSION['oaug_refresh_token'])) {
-            $this->refresh_token = "session_error";
+            $this->refreshToken = $sessionErrorString;
         }
         else {
-            $this->refresh_token = $_SESSION['oaug_refresh_token'];
+            $this->refreshToken = $_SESSION['oaug_refresh_token'];
         }
 
         if(!isset($_SESSION['oaug_scope'])) {
-            $this->scope = "session_error";
+            $this->scope = $sessionErrorString;
         }
         else {
             $this->scope = $_SESSION['oaug_scope'];
         }
 
         if(!isset($_SESSION['oaug_expires_in'])) {
-            $this->expires_in = "session_error";
+            $this->expiresIn = $sessionErrorString;
         }
         else {
-            $this->expires_in = $_SESSION['oaug_expires_in'];
+            $this->expiresIn = $_SESSION['oaug_expires_in'];
         }
 
         if(!isset($_SESSION['oaug_token_type'])) {
-            $this->token_type = "session_error";
+            $this->tokenType = $sessionErrorString;
         }
         else {
-            $this->token_type = $_SESSION['oaug_token_type'];
+            $this->tokenType = $_SESSION['oaug_token_type'];
         }
 
         if(!isset($_SESSION['oaug_date_income'])) {
-            $this->date_income = "session_error";
+            $this->dateIncome = $sessionErrorString;
         }
         else {
-            $this->date_income = $_SESSION['oaug_date_income'];
+            $this->dateIncome = $_SESSION['oaug_date_income'];
         }
 
         if(!isset($_SESSION['oaug_date_outcome'])) {
-            $this->date_outcome = "session_error";
+            $this->dateOutcome = $sessionErrorString;
         }
         else {
-            $this->date_outcome = $_SESSION['oaug_date_outcome'];
+            $this->dateOutcome = $_SESSION['oaug_date_outcome'];
         }
 
     }
@@ -174,5 +173,4 @@ class OAuthUserGrants {
             unset($_SESSION['oaug_date_outcome']);
         }
     }
-
 }
