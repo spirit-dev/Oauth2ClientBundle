@@ -1,4 +1,4 @@
-{% extends "SimpleTodoAppBundle::layout.html.twig" %}
+{% extends "::base.html.twig" %}
  
 {% block title %}
   Welcome - {{ parent() }}
@@ -20,7 +20,7 @@
 	{% endstylesheets %}
   {% endif #}
 
-  <link rel="stylesheet" href="{{ asset('bundles/simpletodoapp/css/main.css') }}">
+  {#<link rel="stylesheet" href="{{ asset('bundles/simpletodoapp/css/main.css') }}">#}
 
 {% endblock %}
 
@@ -44,26 +44,25 @@
 
 {% endblock %}
 
+{% block body %}
+	{% block body_content %}
 
-{% block body_content %}
+		{#<div class="jumbotron">#}
+		  {#<h1>Jumbotron heading</h1>
+		  <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+		  <p><a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a></p>#}
 
-	<div class="jumbotron">
-	  {#<h1>Jumbotron heading</h1>
-	  <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-	  <p><a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a></p>#}
+		  <form class="form-signin" id="form_login" action="" role="form">
+			<h2 class="form-signin-heading">Please sign in</h2>
+			<input id="login_usr" type="text" class="form-control" placeholder="Username" required autofocus>
+			<input id="login_pw" type="password" class="form-control" placeholder="Password" required>
+			<label class="checkbox">
+			  <input type="checkbox" value="remember-me"> Remember me
+			</label>
+			<button class="btn btn-lg btn-primary btn-block">Sign in</button>
+		  </form>
 
-	  <form class="form-signin" id="form_login" action="" role="form">
-		<h2 class="form-signin-heading">Please sign in</h2>
-		<input id="login_usr" type="text" class="form-control" placeholder="Username" required autofocus>
-		<input id="login_pw" type="password" class="form-control" placeholder="Password" required>
-		<label class="checkbox">
-		  <input type="checkbox" value="remember-me"> Remember me
-		</label>
-		<button class="btn btn-lg btn-primary btn-block">Sign in</button>
-	  </form>
+		{#</div>#}
 
-	</div>
-
+	{% endblock %}
 {% endblock %}
-
-
