@@ -55,7 +55,7 @@
       <include name="**/*.php" />
       <modified />
     </fileset>
-    <fileset dir="${basedir}/src/">
+    <fileset dir="${sourcedir}">
       <include name="**/*Test.php" />
       <modified />
     </fileset>
