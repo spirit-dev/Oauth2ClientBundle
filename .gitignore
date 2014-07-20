@@ -1,3 +1,6 @@
-# Sublime Text
+# Composer
+composer.phar
+
+# Sublime text
 *.sublime-project
 *.sublime-workspace

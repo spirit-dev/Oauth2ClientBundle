@@ -6,7 +6,7 @@
   <property name="builddir" value="${workspace}/app/build" />
 
   <target name="build"
-   depends="prepare,composer,vendors,parameters,lint,phploc,pdepend,phpcpd,phpmd-ci,phpcs-ci,phpdox,phpunit,phpcb"/>
+   depends="prepare,lint,phploc,pdepend,phpcpd,phpmd-ci,phpcs-ci,phpdox,phpunit,phpcb"/>
 
   <target name="build-parallel" depends="prepare,lint,tools-parallel,phpunit,phpcb"/>
 
@@ -142,27 +142,6 @@
       <arg path="${sourcedir}" />
       <arg value="--output" />
       <arg path="${builddir}/code-browser" />
-    </exec>
-  </target>
-
-  <target name="composer" description="Update composer.phar">
-    <exec executable="php" failonerror="true">
-        <arg value="composer.phar" />
-        <arg value="self-update" />
-    </exec>
-  </target>
-
-  <target name="vendors" description="Update vendors">
-    <exec executable="php" failonerror="true">
-        <arg value="composer.phar" />
-        <arg value="update" />
-    </exec>
-  </target>
-
-  <target name="parameters" description="Copy parameters">
-    <exec executable="cp" failonerror="true">
-      <arg path="app/config/parameters.yml.dist" />
-      <arg path="app/config/parameters.yml" />
     </exec>
   </target>
 
