@@ -24,7 +24,8 @@
   </target>
 
   <target name="definevars" description="Set environment variables for build">
-    <property name="env.BUILD_VERIOSN_ANT" value="ceci est un test"/>
+    <property environment="env"/>
+    <property name="env.BUILD_VERSION_ANT" value="ceci est un test"/>
   </target>
 
   <target name="clean" description="Cleanup build artifacts">
