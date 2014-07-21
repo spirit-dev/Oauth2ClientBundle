@@ -3,8 +3,9 @@
 namespace SpiritDev\Bundle\OAuth2ClientBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\JsonResponse;
+// use Symfony\Component\HttpFoundation\Response;
+// use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 // these import the "@Route" and "@Template" annotations
@@ -18,20 +19,6 @@ class AuthController extends Controller {
     private $serviceUserEntity = 'spirit_dev_oauth2_client.auth_user_entity';
     private $serviceOAuthRequestor = 'spirit_dev_oauth2_client.oauthrequestor';
     private $sessionErrorString = 'session_error';
-
-    /*
-     * //////@Route("/authorize", name="spirit_dev_oauth2_client_auth")
-     *
-     * public function authAction(Request $request) {
-     *     $authorizeClient = $this->container->get('cb_client.authorize_client');
-     *     if (!$request->query->get('code')) {
-     *         return new RedirectResponse($authorizeClient->getAuthenticationUrl());
-     *     }
-     *     $authorizeClient->getAccessToken($request->query->get('code'));
-     *     
-     *     return new Response($authorizeClient->fetch('http://cubbyholeapi.com/api/v1/offer_scales/1'));
-     * }
-     */
 
     /**
      * @Route("/index", name="spirit_dev_oauth2_client_homepage")
@@ -74,14 +61,16 @@ class AuthController extends Controller {
      * @Route("/logout", name="spirit_dev_oauth2_client_logout")
      */
     public function logoutAction() {
-
-        return 0;
+        $ue = $this->container->get($this->serviceUserEntity);
+        $req = $ue->deleteSessionVars();
+        return $this->redirect($this->generateUrl('spirit_dev_oauth2_client_login'));
     }
 
     /**
-     * @Route("/auth_test", name="spirit_dev_oauth2_client_auth_test")
+     * USE IT FOR A JAVASCRIPT USAGE (use with login.js)
+     * @Route("/auth_test_ajax", name="spirit_dev_oauth2_client_auth_test_ajax")
      */
-    public function passwordGrantAction(Request $request) {
+    public function passwordGrantAjaxAction(Request $request) {
 
         $username = $request->get('username');
         $password = $request->get('password');
@@ -105,22 +94,40 @@ class AuthController extends Controller {
             ), 200);   
         }
         if ($req == 206) {
+
             return new JsonResponse(array(
                 "response_header" => "authentification nok",
                 "response_type" => "explanation",
                 "response_text" => "User authentification failed."
             ), 206);
         }
-        return new JsonResponse($req, 200);
+        return new JsonResponse("$req error triggered by user malfunction!", $req);
+    }
+    
+    /**
+     * USE IT FOR A TWIG AUTOMATIC REDIRECTION
+     * @Route("/auth_test", name="spirit_dev_oauth2_client_auth_test")
+     */
+    public function passwordGrantAction(Request $request) {
+
+        $username = $request->get('username');
+        $password = $request->get('password');
+
+        $oar = $this->container->get($this->serviceOAuthRequestor);
+        $req = $oar->getUserGrants($username, $password);
+
+        if ($req == 200) {
+            // REDIRECT RESPONSE
+            return $this->redirect($this->generateUrl('spirit_dev_oauth2_client_homepage'));
+        }
+        return $this->redirect($this->generateUrl('spirit_dev_oauth2_client_login'));
     }
 
     /**
      * @Route("/check_remote_token", name="spirit_dev_oauth2_client_check_remote_token")
      */
     public function checkTokenAction() {
-
         $oar = $this->container->get($this->serviceOAuthRequestor);
-
         $req = $oar->checkStatus();
 
         return new JsonResponse($req, 200);  
@@ -131,12 +138,7 @@ class AuthController extends Controller {
      */
     public function checkUserAction() {
         $ue = $this->container->get($this->serviceUserEntity);
-        // $req = $ue->setUserEntity("1", "Roger", "roger@paul.fr", "USER");
         $req = $ue->getUserEntity();
-        
-        // $oar = $this->container->get($this->serviceOAuthRequestor);
-        // $req = $oar->getTokenDateOut();
-        // $req = $oar->getRemoteUser("test");
 
         return new JsonResponse($req, 200); 
     }
@@ -145,9 +147,9 @@ class AuthController extends Controller {
      * @Route("/delete_remote_user", name="spirit_dev_oauth2_client_delete_remote_user")
      */
     public function deleteUserAction() {
-
         $ue = $this->container->get($this->serviceUserEntity);
         $req = $ue->deleteSessionVars();
+
         return new JsonResponse($req, 200); 
     }
 }
