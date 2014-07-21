@@ -6,9 +6,9 @@
   <property name="builddir" value="${workspace}/app/build" />
 
   <target name="build"
-   depends="prepare,lint,phploc,pdepend,phpcpd,phpmd-ci,phpcs-ci,phpdox,phpunit,phpcb"/>
+   depends="clean,prepare,lint,phploc,pdepend,phpcpd,phpmd-ci,phpcs-ci,phpdox,phpunit,phpcb"/>
 
-  <target name="build-parallel" depends="prepare,lint,tools-parallel,phpunit,phpcb"/>
+  <target name="build-parallel" depends="clean,prepare,lint,tools-parallel,phpunit,phpcb"/>
 
   <target name="tools-parallel" description="Run tools in parallel">
     <parallel threadCount="2">
@@ -32,7 +32,6 @@
     <delete dir="${builddir}/logs"/>
     <delete dir="${builddir}/pdepend"/>
     <delete dir="${builddir}/docs/*"/>
-    <delete dir="${builddir}*"/>
   </target>
 
   <target name="prepare" depends="clean" description="Prepare for build">
