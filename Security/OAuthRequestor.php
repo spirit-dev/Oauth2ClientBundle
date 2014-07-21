@@ -187,20 +187,23 @@ class OAuthRequestor {
             // getUserInformations (id, username, email, role)
             $user = $this->getRemoteUser($usr);
 
-            // $this->test = $user;
-
-            if (array_key_exists('message', $user) && $user["message"] == "User is not identified") {
-                $subMainReturn = 206;
+            if ($user == null) {
+                $subMainReturn = 410;
             }
             else {
-                // setLocalEntity(id, username, email, role)
-                $this->userEntity->setUserEntity(
-                    $user['id'],
-                    $user['username'],
-                    $user['email'],
-                    $user['role'][0]
-                );
-                $subMainReturn = 200;
+                if (array_key_exists('message', $user) && $user["message"] == "User is not identified") {
+                    $subMainReturn = 206;
+                }
+                else {
+                    // setLocalEntity(id, username, email, role)
+                    $this->userEntity->setUserEntity(
+                        $user['id'],
+                        $user['username'],
+                        $user['email'],
+                        $user['role'][0]
+                    );
+                    $subMainReturn = 200;
+                }
             }
             return $subMainReturn;
         }
