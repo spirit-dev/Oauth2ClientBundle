@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project name="SimpleToDo" default="build">
+  <property environment="env"/>
+  <property name="env.BUILD_VERSION_ANT" value="ceci est un test"/>
+
   <property name="workspace" value="${basedir}" />
   <property name="sourcedir" value="${basedir}" />
   <property name="builddir" value="${workspace}/app/build" />
 
   <target name="build"
-   depends="definevars,clean,prepare,lint,phploc,pdepend,phpcpd,phpmd-ci,phpcs-ci,phpdox,phpunit,phpcb"/>
+   depends="clean,prepare,lint,phploc,pdepend,phpcpd,phpmd-ci,phpcs-ci,phpdox,phpunit,phpcb"/>
 
-  <target name="build-parallel" depends="definevars,clean,prepare,lint,tools-parallel,phpunit,phpcb"/>
+  <target name="build-parallel" depends="clean,prepare,lint,tools-parallel,phpunit,phpcb"/>
 
   <target name="tools-parallel" description="Run tools in parallel">
     <parallel threadCount="2">
@@ -21,11 +24,6 @@
       <antcall target="phploc"/>
       <antcall target="phpdox"/>
     </parallel>
-  </target>
-
-  <target name="definevars" description="Set environment variables for build">
-    <property environment="env"/>
-    <property name="env.BUILD_VERSION_ANT" value="ceci est un test"/>
   </target>
 
   <target name="clean" description="Cleanup build artifacts">
