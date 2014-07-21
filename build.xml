@@ -6,9 +6,9 @@
   <property name="builddir" value="${workspace}/app/build" />
 
   <target name="build"
-   depends="clean,prepare,lint,phploc,pdepend,phpcpd,phpmd-ci,phpcs-ci,phpdox,phpunit,phpcb"/>
+   depends="printinfo,clean,prepare,lint,phploc,pdepend,phpcpd,phpmd-ci,phpcs-ci,phpdox,phpunit,phpcb"/>
 
-  <target name="build-parallel" depends="prepare,lint,tools-parallel,phpunit,phpcb"/>
+  <target name="build-parallel" depends="printinfo,clean,prepare,lint,tools-parallel,phpunit,phpcb"/>
 
   <target name="tools-parallel" description="Run tools in parallel">
     <parallel threadCount="2">
@@ -24,7 +24,7 @@
   </target>
 
   <target name="printinfo" description="Set environment variables for build">
-    <property environment="env" />
+    <property environment="env" value="ceci est un test"/>
     <echo message="jenkins-Jenkins-Definitive-Guide-French-Translation-12"/>
   </target>
 
