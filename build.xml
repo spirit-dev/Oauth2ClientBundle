@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project name="SimpleToDo" default="build">
-  <property environment="env"/>
-  <property name="env.BUILD_VERSION_ANT" value="ceci est un test"/>
-
   <property name="workspace" value="${basedir}" />
   <property name="sourcedir" value="${basedir}" />
   <property name="builddir" value="${workspace}/app/build" />
