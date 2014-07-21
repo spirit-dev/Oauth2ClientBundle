@@ -24,7 +24,7 @@
   </target>
 
   <target name="printinfo" description="Set environment variables for build">
-    <env key="ANT_BUILD_VERISON" value="9.9" />
+    <property name="BUILD_VERIOSN_ANT" value="ceci est un test"/>
   </target>
 
   <target name="clean" description="Cleanup build artifacts">
