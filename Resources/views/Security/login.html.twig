@@ -4,10 +4,11 @@
 {% block body %}
 	{% block oauth2client_content %}
 
-		<form class="form-signin" id="form_login" action="{{ path('spirit_dev_oauth2_client_auth_test') }}" role="form">
+		
+		<form class="form-signin" id="form_login" action="{{ path('spirit_dev_oauth2_client_auth_test') }}" role="form" method="post">
 			<h2 class="form-signin-heading">Please sign in</h2>
-			<input id="login_usr" type="text" class="form-control" placeholder="Username" required autofocus>
-			<input id="login_pw" type="password" class="form-control" placeholder="Password" required>
+			<input name="username" id="login_usr" type="text" class="form-control" placeholder="Username" required autofocus>
+			<input name="password" id="login_pw" type="password" class="form-control" placeholder="Password" required>
 			<label class="checkbox">
 				<input type="checkbox" value="remember-me"> Remember me
 			</label>

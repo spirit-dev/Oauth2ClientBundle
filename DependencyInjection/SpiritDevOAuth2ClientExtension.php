@@ -29,27 +29,31 @@ class SpiritDevOAuth2ClientExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-        if (!isset($config['token_uri'])) {
+        if (!isset($config['api_oauth_settings']['token_uri'])) {
             throw new \InvalidArgumentException('The "token_uri" option must be set');
         }
-        if (!isset($config['get_user_uri'])) {
+        if (!isset($config['api_oauth_settings']['get_user_uri'])) {
             throw new \InvalidArgumentException('The "get_user_uri" option must be set');
         }
-        if (!isset($config['client_id'])) {
+        if (!isset($config['api_oauth_settings']['client_id'])) {
             throw new \InvalidArgumentException('The "client_id" option must be set');
         }
-        if (!isset($config['client_secret'])) {
+        if (!isset($config['api_oauth_settings']['client_secret'])) {
             throw new \InvalidArgumentException('The "client_secret" option must be set');
         }
-        if (!isset($config['redirect_uri'])) {
+        if (!isset($config['api_oauth_settings']['redirect_uri'])) {
             throw new \InvalidArgumentException('The "redirect_uri" option must be set');
         }
+        if (!isset($config['login_success_settings']['redirection_type'])) {
+            throw new \InvalidArgumentException('The "redirection_type" option must be set');
+        }
 
-        $container->setParameter('spirit_dev_o_auth2_client.token_uri', $config['token_uri']);
-        $container->setParameter('spirit_dev_o_auth2_client.get_user_uri', $config['get_user_uri']);
-        $container->setParameter('spirit_dev_o_auth2_client.client_id', $config['client_id']);
-        $container->setParameter('spirit_dev_o_auth2_client.client_secret', $config['client_secret']);
-        $container->setParameter('spirit_dev_o_auth2_client.redirect_uri', $config['redirect_uri']);
+        $container->setParameter('spirit_dev_o_auth2_client.token_uri', $config['api_oauth_settings']['token_uri']);
+        $container->setParameter('spirit_dev_o_auth2_client.get_user_uri', $config['api_oauth_settings']['get_user_uri']);
+        $container->setParameter('spirit_dev_o_auth2_client.client_id', $config['api_oauth_settings']['client_id']);
+        $container->setParameter('spirit_dev_o_auth2_client.client_secret', $config['api_oauth_settings']['client_secret']);
+        $container->setParameter('spirit_dev_o_auth2_client.redirect_uri', $config['api_oauth_settings']['redirect_uri']);
+        $container->setParameter('spirit_dev_o_auth2_client.redirection_type', $config['login_success_settings']['redirection_type']);
     }
 
     public function getXsdValidationBasePath()

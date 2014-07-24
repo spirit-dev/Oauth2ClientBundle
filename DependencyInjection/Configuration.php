@@ -25,11 +25,19 @@ class Configuration implements ConfigurationInterface
         // more information on that topic.
         $rootNode
             ->children()
-            ->scalarNode('token_uri')->isRequired()->cannotBeEmpty()->end()
-            ->scalarNode('get_user_uri')->isRequired()->cannotBeEmpty()->end()
-            ->scalarNode('client_id')->isRequired()->cannotBeEmpty()->end()
-            ->scalarNode('client_secret')->isRequired()->cannotBeEmpty()->end()
-            ->scalarNode('redirect_uri')->isRequired()->cannotBeEmpty()->end()
+            ->arrayNode('api_oauth_settings')
+                ->children()
+                    ->scalarNode('token_uri')->isRequired()->cannotBeEmpty()->end()
+                    ->scalarNode('get_user_uri')->isRequired()->cannotBeEmpty()->end()
+                    ->scalarNode('client_id')->isRequired()->cannotBeEmpty()->end()
+                    ->scalarNode('client_secret')->isRequired()->cannotBeEmpty()->end()
+                    ->scalarNode('redirect_uri')->isRequired()->cannotBeEmpty()->end()
+                ->end()
+            ->end()
+            ->arrayNode('login_success_settings')
+                ->children()
+                    ->scalarNode('redirection_type')->isRequired()->cannotBeEmpty()->end()
+                ->end()
             ->end();
 
         return $treeBuilder;
