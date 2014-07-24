@@ -64,11 +64,14 @@ Add SpiritDevOAuth2ClientBundle settings in app/config/config.yml:
 ``` yaml
 # app/config/config.yml
 spirit_dev_o_auth2_client:
-    token_uri: "http://your.api.com/oauth/v2/token"
-    get_user_uri: "http://your.api.com/api/v1/user"
-    client_id: "ExampleOfClientIDProvidedByYourAPI.com"
-    client_secret: "ExampleOfClientSecretProvidedByYourAPI.com"
-    redirect_uri: "http://your.local.app/"
+    api_oauth_settings:
+        token_uri: "http://your.api.com/oauth/v2/token" // API url to get token
+        get_user_uri: "http://your.api.com/api/v1/user" // API url to get user informations
+        client_id: "ExampleOfClientIDProvidedByYourAPI.com" // ClientId Passphrase given by API
+        client_secret: "ExampleOfClientSecretProvidedByYourAPI.com" // ClientSecret Passphrase given by API
+        redirect_uri: "http://your.local.app/index" // Internal redirection url after login success
+    login_success_settings:
+        redirection_type: "twig" // Switch between js and twig to generate redirection // next arriving feature 
 ```
 
 ## Simulating a token granting (comming soon)
