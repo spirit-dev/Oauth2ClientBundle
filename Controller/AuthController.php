@@ -27,8 +27,6 @@ class AuthController extends Controller {
         
         $ue = $this->container->get($this->serviceUserEntity);
         $oar = $this->container->get($this->serviceOAuthRequestor);
-        // $ug = $this->container->get('cb_client.oauth_user_grants');
-        // $ug->hasExpired();
         $userEnity = $ue->getUserEntity();
 
         if ($userEnity['user_id'] === $sessionErrorString || 
@@ -54,7 +52,9 @@ class AuthController extends Controller {
      */
     public function loginAction() {
 
-        return $this->render('SpiritDevOAuth2ClientBundle:Security:login.html.twig');
+        if($this->container->getParameter('spirit_dev_o_auth2_client.redirection_type') === "twig") {
+            return $this->render('SpiritDevOAuth2ClientBundle:Security:login.html.twig');
+        }
     }
 
     /**
