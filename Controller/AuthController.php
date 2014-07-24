@@ -29,10 +29,10 @@ class AuthController extends Controller {
         $oar = $this->container->get($this->serviceOAuthRequestor);
         $userEnity = $ue->getUserEntity();
 
-        if ($userEnity['user_id'] === $sessionErrorString || 
-            $userEnity['user_username'] === $sessionErrorString || 
-            $userEnity['user_email'] === $sessionErrorString || 
-            $userEnity['user_role'] === $sessionErrorString) {
+        if ($userEnity['user_id'] === $this->sessionErrorString || 
+            $userEnity['user_username'] === $this->sessionErrorString || 
+            $userEnity['user_email'] === $this->sessionErrorString || 
+            $userEnity['user_role'] === $this->sessionErrorString) {
 
             return $this->redirect($this->generateUrl('spirit_dev_oauth2_client_login'));
 
