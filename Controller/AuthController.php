@@ -42,7 +42,7 @@ class AuthController extends Controller {
             array(
                 'user' => $ue->getUserEntity(),
                 'access_token' => $oar->getAccessToken(),
-                'env' => $this->container->get('kernel')->getEnvironment()
+                'refresh_token_uri' => $this->container->getParameter('spirit_dev_o_auth2_client.refresh_token_uri')
             )
         );
     }

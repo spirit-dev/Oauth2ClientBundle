@@ -32,6 +32,7 @@ class Configuration implements ConfigurationInterface
                     ->scalarNode('client_id')->isRequired()->cannotBeEmpty()->end()
                     ->scalarNode('client_secret')->isRequired()->cannotBeEmpty()->end()
                     ->scalarNode('redirect_uri')->isRequired()->cannotBeEmpty()->end()
+                    ->scalarNode('refresh_token_uri')->isRequired()->cannotBeEmpty()->end()
                 ->end()
             ->end()
             ->arrayNode('login_success_settings')

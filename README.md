@@ -70,6 +70,7 @@ spirit_dev_o_auth2_client:
         client_id: "ExampleOfClientIDProvidedByYourAPI.com" // ClientId Passphrase given by API
         client_secret: "ExampleOfClientSecretProvidedByYourAPI.com" // ClientSecret Passphrase given by API
         redirect_uri: "http://your.local.app/index" // Internal redirection url after login success
+        refresh_token_uri: "http://dev.spiritapi.com/check_remote_token" // url to pass to view to reload access_token
     login_success_settings:
         redirection_type: "twig" // Switch between js and twig to generate redirection // next arriving feature 
 ```
