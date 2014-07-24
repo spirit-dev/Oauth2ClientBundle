@@ -79,4 +79,4 @@ Now that you have completed the basic installation and configuration of the FOSU
 The following documents are available:
 
 * [Overriding Templates](https://github.com/spirit-dev/Oauth2ClientBundle/blob/master/Resources/doc/overriding_templates.md)
-* [Overriding Controllers](https://https://github.com/spirit-dev/Oauth2ClientBundle/blob/master/Resources/doc/overriding_controllers.md)
+* [Overriding Controllers](https://github.com/spirit-dev/Oauth2ClientBundle/blob/master/Resources/doc/overriding_controllers.md)
