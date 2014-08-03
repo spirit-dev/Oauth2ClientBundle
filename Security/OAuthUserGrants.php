@@ -36,7 +36,7 @@ class OAuthUserGrants {
 
         $this->getSessionVars();
         
-        if ($this->dateOutcome == $sessionErrorString) {
+        if ($this->dateOutcome == $this->sessionErrorString) {
             return true;
         }
 
@@ -67,7 +67,7 @@ class OAuthUserGrants {
 
     public function getDateOutcome() {
         $this->getSessionVars();
-        if ($this->dateOutcome != $sessionErrorString) {
+        if ($this->dateOutcome != $this->sessionErrorString) {
             return $this->dateOutcome->format('Y-m-d H:i:s');
         }
         else {
@@ -94,49 +94,49 @@ class OAuthUserGrants {
 
     private function getSessionVars() {
         if(!isset($_SESSION['oaug_access_token'])) {
-            $this->accessToken = $sessionErrorString;
+            $this->accessToken = $this->sessionErrorString;
         }
         else {
             $this->accessToken = $_SESSION['oaug_access_token'];
         }
 
         if(!isset($_SESSION['oaug_refresh_token'])) {
-            $this->refreshToken = $sessionErrorString;
+            $this->refreshToken = $this->sessionErrorString;
         }
         else {
             $this->refreshToken = $_SESSION['oaug_refresh_token'];
         }
 
         if(!isset($_SESSION['oaug_scope'])) {
-            $this->scope = $sessionErrorString;
+            $this->scope = $this->sessionErrorString;
         }
         else {
             $this->scope = $_SESSION['oaug_scope'];
         }
 
         if(!isset($_SESSION['oaug_expires_in'])) {
-            $this->expiresIn = $sessionErrorString;
+            $this->expiresIn = $this->sessionErrorString;
         }
         else {
             $this->expiresIn = $_SESSION['oaug_expires_in'];
         }
 
         if(!isset($_SESSION['oaug_token_type'])) {
-            $this->tokenType = $sessionErrorString;
+            $this->tokenType = $this->sessionErrorString;
         }
         else {
             $this->tokenType = $_SESSION['oaug_token_type'];
         }
 
         if(!isset($_SESSION['oaug_date_income'])) {
-            $this->dateIncome = $sessionErrorString;
+            $this->dateIncome = $this->sessionErrorString;
         }
         else {
             $this->dateIncome = $_SESSION['oaug_date_income'];
         }
 
         if(!isset($_SESSION['oaug_date_outcome'])) {
-            $this->dateOutcome = $sessionErrorString;
+            $this->dateOutcome = $this->sessionErrorString;
         }
         else {
             $this->dateOutcome = $_SESSION['oaug_date_outcome'];
