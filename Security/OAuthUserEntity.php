@@ -23,6 +23,20 @@ class OAuthUserEntity {
         return $this->serializeGet();
     }
 
+    public function isValid() {
+        $issue = true;
+        $error = $this->sessionErrorString;
+
+        if($this->getId() == $error || 
+            $this->getUsername() == $error || 
+            $this->getEmail() == $error || 
+            $this->getRole() == $error) {
+            
+            $issue = false;
+        }
+        return $issue;
+    }
+
     public function deleteSessionVars() {
         if(isset($_SESSION['user_id'])) {
             unset($_SESSION['user_id']);

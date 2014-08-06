@@ -223,4 +223,8 @@ class OAuthRequestor {
         // destroy user grants session vars
         return $this->userGrants->deleteSessionVars();
     }
+
+    public function isValid() {
+        return $this->userGrants->isValid();
+    }
 }

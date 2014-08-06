@@ -173,4 +173,21 @@ class OAuthUserGrants {
             unset($_SESSION['oaug_date_outcome']);
         }
     }
+
+    public function isValid() {
+        $issue = true;
+        $error = $this->sessionErrorString;
+        if($this->accessToken == $error ||
+            $this->refreshToken == $error ||
+            $this->scope == $error ||
+            $this->expiresIn == $error ||
+            $this->tokenType == $error ||
+            $this->dateIncome == $error ||
+            $this->dateOutcome == $error) {
+
+            $issue = false;
+        }
+
+        return $issue;
+    }
 }

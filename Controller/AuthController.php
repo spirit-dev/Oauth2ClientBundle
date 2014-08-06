@@ -27,22 +27,18 @@ class AuthController extends Controller {
         
         $ue = $this->container->get($this->serviceUserEntity);
         $oar = $this->container->get($this->serviceOAuthRequestor);
-        $userEnity = $ue->getUserEntity();
 
-        if ($userEnity['user_id'] === $this->sessionErrorString || 
-            $userEnity['user_username'] === $this->sessionErrorString || 
-            $userEnity['user_email'] === $this->sessionErrorString || 
-            $userEnity['user_role'] === $this->sessionErrorString) {
+        if (!$ue->isValid() || !$oar->isValid()) {
 
             return $this->redirect($this->generateUrl('spirit_dev_oauth2_client_login'));
-
         }
 
-        return $this->render('SpiritDevOAuth2ClientBundle:Default:index.html.twig', 
+        return $this->render('SimpleTodoAppBundle:Default:index.html.twig', 
             array(
                 'user' => $ue->getUserEntity(),
                 'access_token' => $oar->getAccessToken(),
-                'refresh_token_uri' => $this->container->getParameter('spirit_dev_o_auth2_client.refresh_token_uri')
+                'refresh_token_uri' => $this->container->getParameter('spirit_dev_o_auth2_client.refresh_token_uri'),
+                'name' => "Christophe"
             )
         );
     }
