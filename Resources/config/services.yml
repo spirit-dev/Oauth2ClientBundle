@@ -4,16 +4,9 @@ parameters:
     spirit_dev_oauth2_client.auth_user_entity.class: SpiritDev\Bundle\OAuth2ClientBundle\Security\OAuthUserEntity
 
 services:
-    # spirit_dev_oauth2_client.oauthrequestor:
-    #     class: %spirit_dev_oauth2_client.oauthrequestor.class%
-    #     calls:
-    #         - [setUserGrantsManager, ["@spirit_dev_oauth2_client.oauth_user_grants"]]
-    #         - [setUserEntity, ["@spirit_dev_oauth2_client.auth_user_entity"]]
-    #         - [setBroswer, ["@buzz"]]
     spirit_dev_oauth2_client.oauthrequestor:
         class: %spirit_dev_oauth2_client.oauthrequestor.class%
         arguments: [%spirit_dev_o_auth2_client.token_uri%, %spirit_dev_o_auth2_client.get_user_uri%, %spirit_dev_o_auth2_client.client_id%, %spirit_dev_o_auth2_client.client_secret%, %spirit_dev_o_auth2_client.redirect_uri%, "@spirit_dev_oauth2_client.oauth_user_grants", "@spirit_dev_oauth2_client.auth_user_entity", "@buzz"]
-       # arguments: [@service_id, "plain_value", %parameter%]
     spirit_dev_oauth2_client.oauth_user_grants:
         class: %spirit_dev_oauth2_client.oauth_user_grants.class%
     spirit_dev_oauth2_client.auth_user_entity:

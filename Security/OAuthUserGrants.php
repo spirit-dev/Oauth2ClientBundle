@@ -1,5 +1,27 @@
 <?php
 
+/** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **
+ **             ___                                                         **
+ **            /   \        _      _ _          ___                         **
+ **           / /\  \ _ __ (_)_ _ (_) |_       |   \  ___    __             **
+ **           \/ /  /| `_ \| | `_\| |  _| ___  | |\ \/ _ \  / /  __/        **
+ **           /  / /\| |_) | | |  | | |  |___| | |/ /  __/\/ /  \__\        **
+ **           \  \/ /| ,__/|_|_|  |_|_|        |___/ \___| _/   /           **
+ **            \___/ |_|                                                    **
+ **                                                 ____                    **
+ **                    ____                       /\ ___/\                  **
+ **                  /\ ___/\                     \ \___\ \                 **
+ **                  \ \___\ \__________ __________\/____\/                 **
+ **                   \/____\/__________|__________/\ ___/\                 **
+ **                   /\___ /\                     \ \___\ \                **
+ **                   \ \___\ \                     \/____\/                **
+ **                    \/____\/                                             **
+ **                                                                         **
+ **          Jean Bordat                                                    **
+ **          Since 2K10 until today                                         **
+ **                                                                         **
+ ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **/
+
 namespace SpiritDev\Bundle\OAuth2ClientBundle\Security;
 
 use \DateTime;
@@ -18,6 +40,18 @@ class OAuthUserGrants {
 
     protected $sessionErrorString = "session_error";
 
+    /**
+     * Initialisation of Class datas
+     * @param String $accessToken  Access Token consummed by API
+     * @param String $refreshToken Refresh Token consummed by API
+     * @param String $scope        Determines OAuth2 needs
+     * @param Date   $expiresIn    Refresh token date expiration
+     * @param String $tokenType    Type of token
+     *
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * Date    2014-06-19
+     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     */
     public function setGrants($accessToken, $refreshToken, $scope, $expiresIn, $tokenType) {
 
         $this->accessToken = $accessToken;
@@ -32,6 +66,14 @@ class OAuthUserGrants {
 
     }
 
+    /**
+     * Function checking if acess token is expired
+     * @return boolean Expired or not
+     *
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * Date    2014-06-19
+     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     */
     public function hasExpired() {
 
         $this->getSessionVars();
@@ -51,6 +93,14 @@ class OAuthUserGrants {
         }
     }
 
+    /**
+     * Getter for Access token
+     * @return String Acecss token
+     *
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * Date    2014-06-19
+     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     */
     public function getAccessToken() {
         
         $this->getSessionVars();
@@ -58,6 +108,14 @@ class OAuthUserGrants {
         return $this->accessToken;
     }
 
+    /**
+     * Getter for Refresh token
+     * @return String Refresh token
+     *
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * Date    2014-06-19
+     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     */
     public function getRefreshToken() {
         
         $this->getSessionVars();
@@ -65,6 +123,14 @@ class OAuthUserGrants {
         return $this->refreshToken;
     }
 
+    /**
+     * Getter for expiration acces token date
+     * @return Date Expiration date
+     *
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * Date    2014-06-19
+     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     */
     public function getDateOutcome() {
         $this->getSessionVars();
         if ($this->dateOutcome != $this->sessionErrorString) {
@@ -75,6 +141,13 @@ class OAuthUserGrants {
         }
     }
 
+    /**
+     * Function calculating expiration of access token
+     *
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * Date    2014-06-19
+     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     */
     private function setTimeout() {
 
         $this->dateIncome = new DateTime();
@@ -82,6 +155,13 @@ class OAuthUserGrants {
 
     }
 
+    /**
+     * Function inserting in SESSION necessary datas
+     *
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * Date    2014-06-19
+     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     */
     private function setSessionVars() {
         $_SESSION['oaug_access_token'] = $this->accessToken;
         $_SESSION['oaug_refresh_token'] = $this->refreshToken;
@@ -92,6 +172,13 @@ class OAuthUserGrants {
         $_SESSION['oaug_date_outcome'] = $this->dateOutcome;
     }
 
+    /**
+     * Function retrieving SESSION datas
+     *
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * Date    2014-06-19
+     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     */
     private function getSessionVars() {
         if(!isset($_SESSION['oaug_access_token'])) {
             $this->accessToken = $this->sessionErrorString;
@@ -144,6 +231,13 @@ class OAuthUserGrants {
 
     }
 
+    /**
+     * Function deleting SESSION datas
+     *
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * Date    2014-06-19
+     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     */
     public function deleteSessionVars() {
         if(isset($_SESSION['oaug_access_token'])) {
             unset($_SESSION['oaug_access_token']);
@@ -174,8 +268,17 @@ class OAuthUserGrants {
         }
     }
 
+    /**
+     * Function checking SESSION datas avalability
+     * @return boolean Valid or not
+     *
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * Date    2014-06-19
+     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     */
     public function isValid() {
         $issue = true;
+        $this->getSessionVars();
         $error = $this->sessionErrorString;
         if($this->accessToken == $error ||
             $this->refreshToken == $error ||

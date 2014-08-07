@@ -1,5 +1,27 @@
 <?php
 
+/** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **
+ **             ___                                                         **
+ **            /   \        _      _ _          ___                         **
+ **           / /\  \ _ __ (_)_ _ (_) |_       |   \  ___    __             **
+ **           \/ /  /| `_ \| | `_\| |  _| ___  | |\ \/ _ \  / /  __/        **
+ **           /  / /\| |_) | | |  | | |  |___| | |/ /  __/\/ /  \__\        **
+ **           \  \/ /| ,__/|_|_|  |_|_|        |___/ \___| _/   /           **
+ **            \___/ |_|                                                    **
+ **                                                 ____                    **
+ **                    ____                       /\ ___/\                  **
+ **                  /\ ___/\                     \ \___\ \                 **
+ **                  \ \___\ \__________ __________\/____\/                 **
+ **                   \/____\/__________|__________/\ ___/\                 **
+ **                   /\___ /\                     \ \___\ \                **
+ **                   \ \___\ \                     \/____\/                **
+ **                    \/____\/                                             **
+ **                                                                         **
+ **          Jean Bordat                                                    **
+ **          Since 2K10 until today                                         **
+ **                                                                         **
+ ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **/
+
 namespace SpiritDev\Bundle\OAuth2ClientBundle\Security;
 
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -18,6 +40,21 @@ class OAuthRequestor {
     protected $browser = null;
     protected $userEntity = null;
 
+    /**
+     * Constructor for OAuthRequestor
+     * @param String          $tokenUri     URL to fetch OAuth2 tokens
+     * @param String          $getUserUri   URL to fetch user informations
+     * @param String          $clientId     Unique token provided by API
+     * @param String          $clientSecret Secret pass to contact API
+     * @param String          $redirectUri  URL redirection after OAuth grants
+     * @param OAuthUserGrants $userGrants   Class storing user OAuth values
+     * @param User            $userEntity   Class storing user datas
+     * @param Buzz            $browser      Buzz utils for cUrl requests
+     *
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * Date    2014-06-19
+     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     */
     public function __construct($tokenUri, $getUserUri, $clientId, $clientSecret, 
         $redirectUri, OAuthUserGrants $userGrants, $userEntity, $browser) {
 
@@ -30,47 +67,53 @@ class OAuthRequestor {
         $this->userGrants = $userGrants;
         $this->browser = $browser;
         $this->userEntity = $userEntity;
-
     }
 
-    public function setUserGrantsManager(OAuthUserGrants $userGrants) {
-
-        $this->userGrants = $userGrants;
-    }
-
-    public function setBroswer($browser) {
-
-        $this->browser = $browser;
-    }
-
-    public function setUserEntity($userEntity) {
-
-        $this->userEntity = $userEntity;
-    }
-
+    /**
+     * Getter for redirect uri
+     * @return String redirection uri after granting
+     *
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * Date    2014-06-19
+     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     */
     public function getRedirectUri() {
 
         return $this->redirectUri;
     }
 
+    /**
+     * Getter for access token
+     * @return String Access token consumed by API
+     *
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * Date    2014-06-19
+     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     */
     public function getAccessToken() {
 
         return $this->userGrants->getAccessToken();
     }
 
+    /**
+     * Getter for user necessary datas
+     * @param  Strnig $usr User name
+     * @param  String $psw User password
+     * @return Int      Granting http status
+     *
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * Date    2014-06-19
+     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     */
     public function getUserGrants($usr, $psw) {
 
         $session = new Session();
-        // $session->invalidate();
+
         try {
             $session->start();
         } catch (\Exception $e) {
             
         }
-        // if($session->isStarted()) {
-        //  echo "SESSION STARTED";
-        //  $session->start();
-        // }
 
         $req = $this->formatUserGrantUri($usr, $psw);
 
@@ -81,6 +124,14 @@ class OAuthRequestor {
         return $this->avoidResponse($response, $usr);
     }
 
+    /**
+     * Function wich checks OAuth2 validity
+     * @return Array Container for UI requests
+     *
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * Date    2014-06-19
+     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     */
     public function checkStatus() {
 
         $old_username = $this->userEntity->getUsername();
@@ -121,6 +172,15 @@ class OAuthRequestor {
         );
     }
 
+    /**
+     * Function wich will call API to renew access token
+     * @param  String $refresh_token Token consumed by API for access_token
+     * @return Int                Zero
+     *
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * Date    2014-06-19
+     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     */
     public function getNewAccessToken($refresh_token) {
 
         $req = $this->formatRefreshTokenUri($refresh_token);
@@ -134,6 +194,15 @@ class OAuthRequestor {
         return 0;
     }
 
+    /**
+     * Function to retrieve user informations after grant success
+     * @param  String $usn Username
+     * @return Array      Container of user informations
+     *
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * Date    2014-06-19
+     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     */
     public function getRemoteUser($usn) {
 
         $req = $this->formatGetUserUri($usn, $this->getAccessToken());
@@ -143,21 +212,60 @@ class OAuthRequestor {
         return json_decode($serverResponse->getContent(), true);
     }
 
+    /**
+     * Utility function to construct Grant request
+     * @param  String $usr User name
+     * @param  String $psw User password
+     * @return String      Uri formatted
+     *
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * Date    2014-06-19
+     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     */
     private function formatUserGrantUri($usr, $psw) {
 
         return $this->tokenUri."?grant_type=".$this->grantTypePassword."&client_id=".$this->clientId."&client_secret=".$this->clientSecret."&username=".$usr."&password=".$psw."&redirect_uri=".$this->redirectUri;
     }
 
+    /**
+     * Utility function to construct refresh token request
+     * @param  String $refresh_token Refresh oken consummed by API
+     * @return String                Uri formatted
+     *
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * Date    2014-06-19
+     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     */
     private function formatRefreshTokenUri($refresh_token) {
 
         return $this->tokenUri."?client_id=".$this->clientId."&client_secret=".$this->clientSecret."&grant_type=".$this->grantTypeRefresh."&refresh_token=".$refresh_token;
     }
 
+    /**
+     * Utility function to construct User retrieve request
+     * @param  String $usn         User name
+     * @param  String $accessToken Access token consummed by API
+     * @return Strnig              Uri formatted
+     *
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * Date    2014-06-19
+     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     */
     private function formatGetUserUri($usn, $accessToken) {
 
         return $this->getUserUri."?username=".$usn."&access_token=".$accessToken;
     }
 
+    /**
+     * Function managing Requests responses and treates Session issues
+     * @param  Array  $response Responses data
+     * @param  String $usr      User name
+     * @return Int              HTTP status return
+     *
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * Date    2014-06-19
+     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     */
     private function avoidResponse($response, $usr) {
 
         $mainReturn = 500;
@@ -213,17 +321,41 @@ class OAuthRequestor {
         return $mainReturn;
     }
 
+    /**
+     * Getter for token expiration date
+     * @return [type] [description]
+     *
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * Date    2014-06-19
+     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     */
     public function getTokenDateOut() {
 
         return $this->userGrants->getDateOutcome();
     }
 
+    /**
+     * Function deleting SESSION var
+     * @return OAuthUserGrants OAuthUserGrants treatment
+     *
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * Date    2014-06-19
+     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     */
     public function deleteRemoteToken() {
 
         // destroy user grants session vars
         return $this->userGrants->deleteSessionVars();
     }
 
+    /**
+     * Utility function to check SESSION validity
+     * @return boolean valid or not valid
+     *
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * Date    2014-06-19
+     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     */
     public function isValid() {
         return $this->userGrants->isValid();
     }
