@@ -12,13 +12,11 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class SpiritDevOAuth2ClientExtension extends Extension
-{
+class SpiritDevOAuth2ClientExtension extends Extension {
     /**
      * {@inheritDoc}
      */
-    public function load(array $configs, ContainerBuilder $container)
-    {
+    public function load(array $configs, ContainerBuilder $container) {
         $configuration = new Configuration();
         $config = array();
         foreach ($configs as $subConfig) {
@@ -61,13 +59,11 @@ class SpiritDevOAuth2ClientExtension extends Extension
         $container->setParameter('spirit_dev_o_auth2_client.redirection_type', $config['login_success_settings']['redirection_type']);
     }
 
-    public function getXsdValidationBasePath()
-    {
+    public function getXsdValidationBasePath() {
         return __DIR__.'/../Resources/config/';
     }
 
-    public function getNamespace()
-    {
+    public function getNamespace() {
         return 'http://www.example.com/symfony/schema/';
     }
 }
