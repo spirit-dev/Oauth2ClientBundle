@@ -87,7 +87,7 @@ class OAuthUserGrants implements OAuthUserGrantsInterface {
         $date1 = new DateTime("now");
         $date2 = new DateTime($this->dateOutcome->format('Y-m-d H:i:s'));
 
-        if ($date1 < $date2) {
+        if ($date1 > $date2) {
             return true;
         }
         else {
