@@ -1,18 +1,36 @@
 <?php
 
+/** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **
+ **             ___                                                         **
+ **            /   \        _      _ _          ___                         **
+ **           / /\  \ _ __ (_)_ _ (_) |_       |   \  ___    __             **
+ **           \/ /  /| `_ \| | `_\| |  _| ___  | |\ \/ _ \  / /  __/        **
+ **           /  / /\| |_) | | |  | | |  |___| | |/ /  __/\/ /  \__\        **
+ **           \  \/ /| ,__/|_|_|  |_|_|        |___/ \___| _/   /           **
+ **            \___/ |_|                                                    **
+ **                                                 ____                    **
+ **                    ____                       /\ ___/\                  **
+ **                  /\ ___/\                     \ \___\ \                 **
+ **                  \ \___\ \__________ __________\/____\/                 **
+ **                   \/____\/__________|__________/\ ___/\                 **
+ **                   /\___ /\                     \ \___\ \                **
+ **                   \ \___\ \                     \/____\/                **
+ **                    \/____\/                                             **
+ **                                                                         **
+ **          Jean Bordat                                                    **
+ **          Since 2K10 until today                                         **
+ **                                                                         **
+ ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **/
+
 namespace SpiritDev\Bundle\OAuth2ClientBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
-// use Symfony\Component\HttpFoundation\Response;
-// use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-// these import the "@Route" and "@Template" annotations
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 use OAuth2;
-
 
 class AuthController extends Controller {
 
@@ -22,6 +40,13 @@ class AuthController extends Controller {
 
     /**
      * @Route("/index", name="spirit_dev_oauth2_client_homepage")
+     * 
+     * Index action, will check & dislay index app page
+     * @return View Twig index view
+     *
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * Date    2014-06-19
+     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-08-08
      */
     public function indexAction() {
         
@@ -45,6 +70,13 @@ class AuthController extends Controller {
     
     /**
      * @Route("/login", name="spirit_dev_oauth2_client_login")
+     * 
+     * Login action, will display login page
+     * @return View Twig login view
+     *
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * Date    2014-06-19
+     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-08-08
      */
     public function loginAction() {
 
@@ -55,6 +87,13 @@ class AuthController extends Controller {
 
     /**
      * @Route("/logout", name="spirit_dev_oauth2_client_logout")
+     * 
+     * Logout action, will delete SESSION var and display login view
+     * @return View Twig login view
+     *
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * Date    2014-06-19
+     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-08-08
      */
     public function logoutAction() {
         $ue = $this->container->get($this->serviceUserEntity);
@@ -65,6 +104,14 @@ class AuthController extends Controller {
     /**
      * USE IT FOR A JAVASCRIPT USAGE (use with login.js)
      * @Route("/auth_test_ajax", name="spirit_dev_oauth2_client_auth_test_ajax")
+     * 
+     * Will check user&app grants
+     * @param  Request $request Incoming datas
+     * @return JSON           Json array of user grant
+     *
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * Date    2014-06-19
+     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-08-08
      */
     public function passwordGrantAjaxAction(Request $request) {
 
@@ -103,6 +150,14 @@ class AuthController extends Controller {
     /**
      * USE IT FOR A TWIG AUTOMATIC REDIRECTION
      * @Route("/auth_test", name="spirit_dev_oauth2_client_auth_test")
+     * 
+     * Will check user&app grants
+     * @param  Request $request Incoming datas
+     * @return View           Twig redirection depending of grant issue
+     *
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * Date    2014-06-19
+     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-08-08
      */
     public function passwordGrantAction(Request $request) {
 
@@ -121,8 +176,15 @@ class AuthController extends Controller {
 
     /**
      * @Route("/check_remote_token", name="spirit_dev_oauth2_client_check_remote_token")
+     * 
+     * Function will check access_token avalability
+     * @return JSON Json response of acces_token renew issue
+     *
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * Date    2014-06-19
+     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-08-08
      */
-    public function checkTokenAction() {
+    public function checkAccessTokenAction() {
         $oar = $this->container->get($this->serviceOAuthRequestor);
         $req = $oar->checkStatus();
 
@@ -131,20 +193,17 @@ class AuthController extends Controller {
 
     /**
      * @Route("/check_remote_user", name="spirit_dev_oauth2_client_check_remote_user")
+     * 
+     * Function will check user datas availability
+     * @return JSON Json response container of user datas
+     *
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * Date    2014-06-19
+     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-08-08
      */
     public function checkUserAction() {
         $ue = $this->container->get($this->serviceUserEntity);
         $req = $ue->getUserEntity();
-
-        return new JsonResponse($req, 200); 
-    }
-
-    /**
-     * @Route("/delete_remote_user", name="spirit_dev_oauth2_client_delete_remote_user")
-     */
-    public function deleteUserAction() {
-        $ue = $this->container->get($this->serviceUserEntity);
-        $req = $ue->deleteSessionVars();
 
         return new JsonResponse($req, 200); 
     }
