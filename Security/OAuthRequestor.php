@@ -26,7 +26,9 @@ namespace SpiritDev\Bundle\OAuth2ClientBundle\Security;
 
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class OAuthRequestor {
+use SpiritDev\Bundle\OAuth2ClientBundle\Model\OAuthRequestorInterface;
+
+class OAuthRequestor implements OAuthRequestorInterface {
 
     protected $tokenUri = null;
     protected $getUserUri = null;

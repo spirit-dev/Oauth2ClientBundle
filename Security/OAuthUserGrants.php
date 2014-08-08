@@ -24,10 +24,12 @@
 
 namespace SpiritDev\Bundle\OAuth2ClientBundle\Security;
 
+use SpiritDev\Bundle\OAuth2ClientBundle\Model\OAuthUserGrantsInterface;
+
 use \DateTime;
 use \DateInterval;
 
-class OAuthUserGrants {
+class OAuthUserGrants implements OAuthUserGrantsInterface {
 
     protected $accessToken;
     protected $refreshToken;

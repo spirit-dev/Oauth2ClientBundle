@@ -24,7 +24,9 @@
 
 namespace SpiritDev\Bundle\OAuth2ClientBundle\Security;
 
-class OAuthUserEntity {
+use SpiritDev\Bundle\OAuth2ClientBundle\Model\OAuthUserEntityInterface;
+
+class OAuthUserEntity implements OAuthUserEntityInterface {
 
 	protected $userId;
     protected $userUsername;
