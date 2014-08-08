@@ -27,6 +27,7 @@ namespace SpiritDev\Bundle\OAuth2ClientBundle\Security;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 use SpiritDev\Bundle\OAuth2ClientBundle\Model\OAuthRequestorInterface;
+use SpiritDev\Bundle\OAuth2ClientBundle\Util\UriFormaterUtil as UriFormater;
 
 class OAuthRequestor implements OAuthRequestorInterface {
 
@@ -117,7 +118,9 @@ class OAuthRequestor implements OAuthRequestorInterface {
             
         }
 
-        $req = $this->formatUserGrantUri($usr, $psw);
+        $req = UriFormater()->formatUserGrantUri($this->tokenUri, 
+            $this->grantTypePassword, $this->clientId, 
+            $this->clientSecret, $this->redirectUri, $usr, $psw);
 
         $serverResponse = $this->browser->get($req);
 
@@ -167,9 +170,9 @@ class OAuthRequestor implements OAuthRequestorInterface {
             "response_text" => "Token refreshed",
             "response_data" => array(
                 "access_token" => $this->getAccessToken(),
-                    "old_username" => $old_username,
-                    "actual_username" => $this->userEntity->getUsername(),
-                    "expires_at" => $this->getTokenDateOut()
+                "old_username" => $old_username,
+                "actual_username" => $this->userEntity->getUsername(),
+                "expires_at" => $this->getTokenDateOut()
             )
         );
     }
@@ -185,7 +188,9 @@ class OAuthRequestor implements OAuthRequestorInterface {
      */
     public function getNewAccessToken($refresh_token) {
 
-        $req = $this->formatRefreshTokenUri($refresh_token);
+        $req = UriFormater()->formatRefreshTokenUri($this->tokenUri, 
+            $this->clientId, $this->clientSecret, $this->grantTypeRefresh, 
+            $refresh_token);
 
         $serverResponse = $this->browser->get($req);
 
@@ -207,55 +212,12 @@ class OAuthRequestor implements OAuthRequestorInterface {
      */
     public function getRemoteUser($usn) {
 
-        $req = $this->formatGetUserUri($usn, $this->getAccessToken());
+        $req = UriFormater()->formatGetUserUri($this->$getUserUri, $usn, 
+            $this->getAccessToken());
 
         $serverResponse = $this->browser->get($req);
 
         return json_decode($serverResponse->getContent(), true);
-    }
-
-    /**
-     * Utility function to construct Grant request
-     * @param  String $usr User name
-     * @param  String $psw User password
-     * @return String      Uri formatted
-     *
-     * @author Jean BORDAT <bordat.jean@gmail.com>
-     * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
-     */
-    private function formatUserGrantUri($usr, $psw) {
-
-        return $this->tokenUri."?grant_type=".$this->grantTypePassword."&client_id=".$this->clientId."&client_secret=".$this->clientSecret."&username=".$usr."&password=".$psw."&redirect_uri=".$this->redirectUri;
-    }
-
-    /**
-     * Utility function to construct refresh token request
-     * @param  String $refresh_token Refresh oken consummed by API
-     * @return String                Uri formatted
-     *
-     * @author Jean BORDAT <bordat.jean@gmail.com>
-     * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
-     */
-    private function formatRefreshTokenUri($refresh_token) {
-
-        return $this->tokenUri."?client_id=".$this->clientId."&client_secret=".$this->clientSecret."&grant_type=".$this->grantTypeRefresh."&refresh_token=".$refresh_token;
-    }
-
-    /**
-     * Utility function to construct User retrieve request
-     * @param  String $usn         User name
-     * @param  String $accessToken Access token consummed by API
-     * @return Strnig              Uri formatted
-     *
-     * @author Jean BORDAT <bordat.jean@gmail.com>
-     * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
-     */
-    private function formatGetUserUri($usn, $accessToken) {
-
-        return $this->getUserUri."?username=".$usn."&access_token=".$accessToken;
     }
 
     /**
