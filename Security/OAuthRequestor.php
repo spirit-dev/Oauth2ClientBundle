@@ -118,7 +118,7 @@ class OAuthRequestor implements OAuthRequestorInterface {
             
         }
 
-        $req = UriFormater()->formatUserGrantUri($this->tokenUri, 
+        $req = UriFormater::formatUserGrantUri($this->tokenUri,
             $this->grantTypePassword, $this->clientId, 
             $this->clientSecret, $this->redirectUri, $usr, $psw);
 
@@ -188,7 +188,7 @@ class OAuthRequestor implements OAuthRequestorInterface {
      */
     public function getNewAccessToken($refresh_token) {
 
-        $req = UriFormater()->formatRefreshTokenUri($this->tokenUri, 
+        $req = UriFormater::formatRefreshTokenUri($this->tokenUri,
             $this->clientId, $this->clientSecret, $this->grantTypeRefresh, 
             $refresh_token);
 
@@ -211,8 +211,7 @@ class OAuthRequestor implements OAuthRequestorInterface {
      * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
      */
     public function getRemoteUser($usn) {
-
-        $req = UriFormater()->formatGetUserUri($this->$getUserUri, $usn, 
+        $req = UriFormater::formatGetUserUri($this->getUserUri, $usn,
             $this->getAccessToken());
 
         $serverResponse = $this->browser->get($req);

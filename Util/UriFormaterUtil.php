@@ -14,7 +14,7 @@ class UriFormaterUtil {
      * Date    2014-06-19
      * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
      */
-    private function formatUserGrantUri($tokenUri, $grantTypePassword, 
+    public static function formatUserGrantUri($tokenUri, $grantTypePassword,
     	$clientId, $clientSecret, $redirectUri, $usr, $psw) {
 
         return $tokenUri."?grant_type=".$grantTypePassword."&client_id=".
@@ -31,7 +31,7 @@ class UriFormaterUtil {
      * Date    2014-06-19
      * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
      */
-    private function formatRefreshTokenUri($tokenUri, $clientId, $clientSecret,
+    public static function formatRefreshTokenUri($tokenUri, $clientId, $clientSecret,
     	$grantTypeRefresh, $refresh_token) {
 
         return $tokenUri."?client_id=".$clientId."&client_secret=".
@@ -49,7 +49,7 @@ class UriFormaterUtil {
      * Date    2014-06-19
      * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
      */
-    private function formatGetUserUri($getUserUri, $usn, $accessToken) {
+    public static function formatGetUserUri($getUserUri, $usn, $accessToken) {
 
         return $getUserUri."?username=".$usn."&access_token=".$accessToken;
     }
