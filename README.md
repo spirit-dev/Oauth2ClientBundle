@@ -1,10 +1,12 @@
 ## DOCUMENT BEING WRITTEN
 
-Getting Started With SpiritDevOAuth2ClientBundle
+Getting Started With SpiritDevO-Auth2ClientBundle
 =========================================
 
-## Prerequisites
-This bundle is a client side OAuth managment. It is fully working with API OAuth2ManagerSide (comming soon)
+## Introduction
+OAuth2ClientBundle is an OAuth2 flow manager. Define your API grants, your rendering template and thats all.
+It manages for you token flows from [OAuth2](http://oauth.net/2/) Protocol. It also provides a direct login to API side. 
+Take a look to the following to get started with OAuth2ClientBundle ;)
 
 ## Installation
 
@@ -12,7 +14,7 @@ Installation is a quick 3 steps process:
 
 1. Download SpiritDevOAuth2ClientBundle
 2. Enable the Bundle
-3. Configure the SpiritDevOAuth2ClientBundle (comming soon)
+3. Configure the SpiritDevOAuth2ClientBundle
 
 
 ### Step 1: Install SpiritDevOAuth2ClientBundle
@@ -49,7 +51,7 @@ public function registerBundles()
 
 ### Step 3: Configure SpiritDevOAuth2ClientBundle
 
-### Document beeing written. This part of the documentation will come soon
+### Document beeing written. This part may change.
 
 Import the routing.yml configuration file in app/config/routing.yml:
 
@@ -73,6 +75,7 @@ spirit_dev_o_auth2_client:
         refresh_token_uri: "http://dev.spiritapi.com/check_remote_token" // url to pass to view to reload access_token
     login_success_settings:
         redirection_type: "twig" // Switch between js and twig to generate redirection // next arriving feature 
+        redirection_template: AcmeDemoBundle:Default:index.html.twig
 ```
 
 ## Simulating a token granting (comming soon)
