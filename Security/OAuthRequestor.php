@@ -271,7 +271,8 @@ class OAuthRequestor implements OAuthRequestorInterface {
                         $user['id'],
                         $user['username'],
                         $user['email'],
-                        $user['role'][0]
+                        $user['role'][0],
+                        $user['guid']
                     );
                     $subMainReturn = 200;
                 }

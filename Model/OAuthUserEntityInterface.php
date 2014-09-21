@@ -38,7 +38,7 @@ interface OAuthUserEntityInterface {
      * Date    2014-06-19
      * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
-    public function setUserEntity($id, $username, $email, $role);
+    public function setUserEntity($id, $username, $email, $role, $guid);
 
     /**
      * Getter for user object
@@ -78,5 +78,25 @@ interface OAuthUserEntityInterface {
      * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function getUsername();
+
+    /**
+     * Function will sets SESSION data
+     * @param String User guid or error phrase
+     *
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * @date    21/09/2014
+     * @time    17:14
+     */
+    public function setGuid($guid);
+
+    /**
+     * Function which returns SESSION data
+     * @return String    User guid
+     *
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * @date    21/09/2014
+     * @time    17:14
+     */
+    public function getGuid();
 
 }

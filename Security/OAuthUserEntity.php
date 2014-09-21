@@ -48,9 +48,9 @@ class OAuthUserEntity implements OAuthUserEntityInterface {
      * Date    2014-06-19
      * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
-    public function setUserEntity($id, $username, $email, $role) {
+    public function setUserEntity($id, $username, $email, $role, $guid) {
         
-        $this->serializeSet($id, $username, $email, $role);
+        $this->serializeSet($id, $username, $email, $role, $guid);
 
         return $this->getUserEntity();
     }
@@ -83,7 +83,8 @@ class OAuthUserEntity implements OAuthUserEntityInterface {
         if($this->getId() == $error || 
             $this->getUsername() == $error || 
             $this->getEmail() == $error || 
-            $this->getRole() == $error) {
+            $this->getRole() == $error ||
+            $this->getGuid() == $error) {
             
             $issue = false;
         }
@@ -110,6 +111,9 @@ class OAuthUserEntity implements OAuthUserEntityInterface {
         if(isset($_SESSION['user_role'])) {
             unset($_SESSION['user_role']);
         }
+        if(isset($_SESSION['user_guid'])) {
+            unset($_SESSION['user_guid']);
+        }
     }
 
     /**
@@ -129,6 +133,7 @@ class OAuthUserEntity implements OAuthUserEntityInterface {
         $this->setUsername($username);
         $this->setEmail($email);
         $this->setRole($role);
+        $this->setGuid($guid);
     }
 
     /**
@@ -145,7 +150,8 @@ class OAuthUserEntity implements OAuthUserEntityInterface {
             "user_id" => $this->getId(),
             "user_username" => $this->getUsername(),
             "user_email" => $this->getEmail(),
-            "user_role" => $this->getRole()
+            "user_role" => $this->getRole(),
+            "user_guid" => $this->getGuid()
         );
     }
 
@@ -270,6 +276,19 @@ class OAuthUserEntity implements OAuthUserEntityInterface {
     }
 
     /**
+     * Function will sets SESSION data
+     * @param String User guid or error phrase
+     *
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * @date    21/09/2014
+     * @time    17:14
+     */
+    public function setGuid($guid) {
+        $_SESSION['user_guid'] = $guid;
+        return $this->userGuid;
+    }
+
+    /**
      * Function which returns SESSION data
      * @return String    User guid
      *  
@@ -277,20 +296,12 @@ class OAuthUserEntity implements OAuthUserEntityInterface {
      * @date    21/09/2014
      * @time    17:14
      */
-    public function getUserGuid() {
-        return $this->userGuid;
+    public function getGuid() {
+        if(isset($_SESSION['user_guid'])) {
+            return $_SESSION['user_guid'];
+        }
+        else {
+            return $this->sessionErrorString;
+        }
     }
-
-    /**
-     * Function will sets SESSION data
-     * @param Array User roles or error phrase
-     *  
-     * @author Jean BORDAT <bordat.jean@gmail.com>
-     * @date    21/09/2014
-     * @time    17:14
-     */
-    public function setUserGuid($userGuid) {
-        $this->userGuid = $userGuid;
-    }
-
 }

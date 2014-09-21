@@ -2,6 +2,7 @@ parameters:
     spirit_dev_oauth2_client.oauthrequestor.class: SpiritDev\Bundle\OAuth2ClientBundle\Security\OAuthRequestor
     spirit_dev_oauth2_client.oauth_user_grants.class: SpiritDev\Bundle\OAuth2ClientBundle\Security\OAuthUserGrants
     spirit_dev_oauth2_client.auth_user_entity.class: SpiritDev\Bundle\OAuth2ClientBundle\Security\OAuthUserEntity
+    spirit_dev_pauth2_client.bundle_configuration.class: SpiritDev\Bundle\OAuth2ClientBundle\DependencyInjection\ConfigurationManager
 
 services:
     spirit_dev_oauth2_client.oauthrequestor:
@@ -11,3 +12,6 @@ services:
         class: %spirit_dev_oauth2_client.oauth_user_grants.class%
     spirit_dev_oauth2_client.auth_user_entity:
         class: %spirit_dev_oauth2_client.auth_user_entity.class%
+    spirit_dev_oauth2_client.bundle_configuration:
+        class: %spirit_dev_pauth2_client.bundle_configuration.class%
+        arguments: [%spirit_dev_o_auth2_client.redirection_template%]

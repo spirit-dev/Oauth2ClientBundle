@@ -38,6 +38,7 @@ class Configuration implements ConfigurationInterface {
             ->arrayNode('login_success_settings')
                 ->children()
                     ->scalarNode('redirection_type')->isRequired()->cannotBeEmpty()->end()
+                    ->scalarNode('redirection_template')->isRequired()->cannotBeEmpty()->end()
                 ->end()
             ->end();
 

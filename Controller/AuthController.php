@@ -36,6 +36,7 @@ class AuthController extends Controller {
 
     private $serviceUserEntity = 'spirit_dev_oauth2_client.auth_user_entity';
     private $serviceOAuthRequestor = 'spirit_dev_oauth2_client.oauthrequestor';
+    private $serviceConfiguration = 'spirit_dev_oauth2_client.bundle_configuration';
     private $sessionErrorString = 'session_error';
 
     /**
@@ -49,7 +50,11 @@ class AuthController extends Controller {
      * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-08-08
      */
     public function indexAction() {
-        
+
+//        $configuredTemplate = $this->container->getParameter('spirit_dev_o_auth2_client.token_uri.redirection_template');
+        $conf = $this->container->get($this->serviceConfiguration);
+        $test = $conf->getTemplateName();
+
         $ue = $this->container->get($this->serviceUserEntity);
         $oar = $this->container->get($this->serviceOAuthRequestor);
 
@@ -58,12 +63,11 @@ class AuthController extends Controller {
             return $this->redirect($this->generateUrl('spirit_dev_oauth2_client_login'));
         }
 
-        return $this->render('SimpleTodoAppBundle:Default:index.html.twig', 
+        return $this->render($conf->getTemplateName(),
             array(
                 'user' => $ue->getUserEntity(),
                 'access_token' => $oar->getAccessToken(),
-                'refresh_token_uri' => $this->container->getParameter('spirit_dev_o_auth2_client.refresh_token_uri'),
-                'name' => "Christophe"
+                'refresh_token_uri' => $this->container->getParameter('spirit_dev_o_auth2_client.refresh_token_uri')
             )
         );
     }

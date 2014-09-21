@@ -30,33 +30,53 @@ class SpiritDevOAuth2ClientExtension extends Extension {
         if (!isset($config['api_oauth_settings']['token_uri'])) {
             throw new \InvalidArgumentException('The "token_uri" option must be set');
         }
+        else {
+            $container->setParameter('spirit_dev_o_auth2_client.token_uri', $config['api_oauth_settings']['token_uri']);
+        }
+
         if (!isset($config['api_oauth_settings']['get_user_uri'])) {
             throw new \InvalidArgumentException('The "get_user_uri" option must be set');
         }
+        else {
+            $container->setParameter('spirit_dev_o_auth2_client.get_user_uri', $config['api_oauth_settings']['get_user_uri']);
+        }
+
         if (!isset($config['api_oauth_settings']['client_id'])) {
             throw new \InvalidArgumentException('The "client_id" option must be set');
         }
+        else {
+            $container->setParameter('spirit_dev_o_auth2_client.client_id', $config['api_oauth_settings']['client_id']);
+        }
+
         if (!isset($config['api_oauth_settings']['client_secret'])) {
             throw new \InvalidArgumentException('The "client_secret" option must be set');
         }
+        else {
+            $container->setParameter('spirit_dev_o_auth2_client.client_secret', $config['api_oauth_settings']['client_secret']);
+        }
+
         if (!isset($config['api_oauth_settings']['redirect_uri'])) {
             throw new \InvalidArgumentException('The "redirect_uri" option must be set');
         }
+        else {
+            $container->setParameter('spirit_dev_o_auth2_client.redirect_uri', $config['api_oauth_settings']['redirect_uri']);
+        }
+
         if (!isset($config['api_oauth_settings']['refresh_token_uri'])) {
             throw new \InvalidArgumentException('The "refresh_token_uri" option must be set');
         }
-        if (!isset($config['login_success_settings']['redirection_type'])) {
-            throw new \InvalidArgumentException('The "redirection_type" option must be set');
+        else {
+            $container->setParameter('spirit_dev_o_auth2_client.refresh_token_uri', $config['api_oauth_settings']['refresh_token_uri']);
         }
 
-        $container->setParameter('spirit_dev_o_auth2_client.token_uri', $config['api_oauth_settings']['token_uri']);
-        $container->setParameter('spirit_dev_o_auth2_client.get_user_uri', $config['api_oauth_settings']['get_user_uri']);
-        $container->setParameter('spirit_dev_o_auth2_client.client_id', $config['api_oauth_settings']['client_id']);
-        $container->setParameter('spirit_dev_o_auth2_client.client_secret', $config['api_oauth_settings']['client_secret']);
-        $container->setParameter('spirit_dev_o_auth2_client.redirect_uri', $config['api_oauth_settings']['redirect_uri']);
-        $container->setParameter('spirit_dev_o_auth2_client.refresh_token_uri', $config['api_oauth_settings']['refresh_token_uri']);
-
         $container->setParameter('spirit_dev_o_auth2_client.redirection_type', $config['login_success_settings']['redirection_type']);
+
+        if (!isset($config['login_success_settings']['redirection_template'])) {
+            throw new \InvalidArgumentException('The "redirection_template" option must be set');
+        }
+        else {
+            $container->setParameter('spirit_dev_o_auth2_client.redirection_template', $config['login_success_settings']['redirection_template']);
+        }
     }
 
     public function getXsdValidationBasePath() {
