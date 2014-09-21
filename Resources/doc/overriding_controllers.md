@@ -9,7 +9,7 @@ specific needs of your application.
 **Note:**
 
 > Overriding the controller requires to duplicate all the logic of the action.
-> Most of the time, it is easier to use the [events](controller_events.md)
+> Most of the time, it is easier to use the events
 > to implement the functionality. Replacing the whole controller should be
 > considered as the last solution when nothing else is possible.
 

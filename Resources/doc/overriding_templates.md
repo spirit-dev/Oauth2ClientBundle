@@ -7,7 +7,7 @@ the bundle. Although the template names are not configurable, the Symfony2
 framework provides two ways to override the templates of a bundle.
 
 1. Define a new template of the same name in the `app/Resources` directory
-2. Create a new bundle that is defined as a child of `FOSUserBundle`
+2. Create a new bundle that is defined as a child of `SpiritDevOAuth2ClientBundle`
 
 ### Example: Overriding The Default layout.html.twig
 
