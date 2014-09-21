@@ -32,7 +32,7 @@ interface OAuthRequestorInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function getRedirectUri();
 
@@ -42,7 +42,7 @@ interface OAuthRequestorInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function getAccessToken();
 
@@ -54,7 +54,7 @@ interface OAuthRequestorInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function getUserGrants($usr, $psw);
 
@@ -64,7 +64,7 @@ interface OAuthRequestorInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function checkStatus();
 
@@ -75,7 +75,7 @@ interface OAuthRequestorInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function getNewAccessToken($refresh_token);
 
@@ -86,7 +86,7 @@ interface OAuthRequestorInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function getRemoteUser($usn);
 
@@ -96,7 +96,7 @@ interface OAuthRequestorInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function getTokenDateOut();
 
@@ -106,7 +106,7 @@ interface OAuthRequestorInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function deleteRemoteToken();
 
@@ -116,7 +116,7 @@ interface OAuthRequestorInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function isValid();
 }

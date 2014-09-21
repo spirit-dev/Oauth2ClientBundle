@@ -32,6 +32,7 @@ class OAuthUserEntity implements OAuthUserEntityInterface {
     protected $userUsername;
     protected $userEmail;
     protected $userRole;
+    protected $userGuid;
 
     private $sessionErrorString = "session_error";
 
@@ -45,7 +46,7 @@ class OAuthUserEntity implements OAuthUserEntityInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function setUserEntity($id, $username, $email, $role) {
         
@@ -60,7 +61,7 @@ class OAuthUserEntity implements OAuthUserEntityInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function getUserEntity() {
 
@@ -73,7 +74,7 @@ class OAuthUserEntity implements OAuthUserEntityInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function isValid() {
         $issue = true;
@@ -94,7 +95,7 @@ class OAuthUserEntity implements OAuthUserEntityInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function deleteSessionVars() {
         if(isset($_SESSION['user_id'])) {
@@ -120,14 +121,14 @@ class OAuthUserEntity implements OAuthUserEntityInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
-    private function serializeSet($id, $username, $email, $role) {
+    private function serializeSet($id, $username, $email, $role, $guid) {
         // set Session vars & local vars
         $this->setId($id);
         $this->setUsername($username);
         $this->setEmail($email);
-        $this->setRole($role);       
+        $this->setRole($role);
     }
 
     /**
@@ -136,7 +137,7 @@ class OAuthUserEntity implements OAuthUserEntityInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     private function serializeGet() {
 
@@ -154,7 +155,7 @@ class OAuthUserEntity implements OAuthUserEntityInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     private function setId($id) {
         $this->userId = $id;
@@ -162,12 +163,12 @@ class OAuthUserEntity implements OAuthUserEntityInterface {
     }
     
     /**
-     * Function whch return SESSION data
+     * Function which return SESSION data
      * @return Int User id or error phrase
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     private function getId() {
         if(isset($_SESSION['user_id'])) {
@@ -184,7 +185,7 @@ class OAuthUserEntity implements OAuthUserEntityInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     private function setUsername($username) {
         $this->userUsername = $username;
@@ -192,12 +193,12 @@ class OAuthUserEntity implements OAuthUserEntityInterface {
     }
     
     /**
-     * Function whch return SESSION data
+     * Function which return SESSION data
      * @return String User name or error phrase
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function getUsername() {
         if(isset($_SESSION['user_username'])) {
@@ -214,7 +215,7 @@ class OAuthUserEntity implements OAuthUserEntityInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     private function setEmail($email) {
         $this->userEmail = $email;
@@ -222,12 +223,12 @@ class OAuthUserEntity implements OAuthUserEntityInterface {
     }
     
     /**
-     * Function whch return SESSION data
+     * Function which return SESSION data
      * @return String User email or error phrase
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     private function getEmail() {
         if(isset($_SESSION['user_email'])) {
@@ -244,7 +245,7 @@ class OAuthUserEntity implements OAuthUserEntityInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     private function setRole($role) {
         $this->userRole = $role;
@@ -252,12 +253,12 @@ class OAuthUserEntity implements OAuthUserEntityInterface {
     }
     
     /**
-     * Function whch return SESSION data
+     * Function which return SESSION data
      * @return Array User roles or error phrase
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     private function getRole() {
         if(isset($_SESSION['user_role'])) {
@@ -266,6 +267,30 @@ class OAuthUserEntity implements OAuthUserEntityInterface {
         else {
             return $this->sessionErrorString;
         }
+    }
+
+    /**
+     * Function which returns SESSION data
+     * @return String    User guid
+     *  
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * @date    21/09/2014
+     * @time    17:14
+     */
+    public function getUserGuid() {
+        return $this->userGuid;
+    }
+
+    /**
+     * Function will sets SESSION data
+     * @param Array User roles or error phrase
+     *  
+     * @author Jean BORDAT <bordat.jean@gmail.com>
+     * @date    21/09/2014
+     * @time    17:14
+     */
+    public function setUserGuid($userGuid) {
+        $this->userGuid = $userGuid;
     }
 
 }

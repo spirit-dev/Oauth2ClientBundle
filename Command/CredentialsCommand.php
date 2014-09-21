@@ -36,7 +36,7 @@ class CredentialsCommand extends ContainerAwareCommand {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-08-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-08-08
      */
     protected function configure() {
         $this
@@ -51,7 +51,7 @@ class CredentialsCommand extends ContainerAwareCommand {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-08-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-08-08
      */
     protected function execute(InputInterface $input, OutputInterface $output) {
         

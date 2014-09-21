@@ -56,7 +56,7 @@ class OAuthRequestor implements OAuthRequestorInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function __construct($tokenUri, $getUserUri, $clientId, $clientSecret, 
         $redirectUri, OAuthUserGrants $userGrants, $userEntity, $browser) {
@@ -78,7 +78,7 @@ class OAuthRequestor implements OAuthRequestorInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function getRedirectUri() {
 
@@ -91,7 +91,7 @@ class OAuthRequestor implements OAuthRequestorInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function getAccessToken() {
 
@@ -106,7 +106,7 @@ class OAuthRequestor implements OAuthRequestorInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function getUserGrants($usr, $psw) {
 
@@ -135,7 +135,7 @@ class OAuthRequestor implements OAuthRequestorInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function checkStatus() {
 
@@ -184,7 +184,7 @@ class OAuthRequestor implements OAuthRequestorInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function getNewAccessToken($refresh_token) {
 
@@ -208,7 +208,7 @@ class OAuthRequestor implements OAuthRequestorInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function getRemoteUser($usn) {
         $req = UriFormater::formatGetUserUri($this->getUserUri, $usn,
@@ -227,7 +227,7 @@ class OAuthRequestor implements OAuthRequestorInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     private function avoidResponse($response, $usr) {
 
@@ -290,7 +290,7 @@ class OAuthRequestor implements OAuthRequestorInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function getTokenDateOut() {
 
@@ -303,7 +303,7 @@ class OAuthRequestor implements OAuthRequestorInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function deleteRemoteToken() {
 
@@ -317,7 +317,7 @@ class OAuthRequestor implements OAuthRequestorInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function isValid() {
         return $this->userGrants->isValid();

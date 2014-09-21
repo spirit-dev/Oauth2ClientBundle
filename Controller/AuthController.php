@@ -46,7 +46,7 @@ class AuthController extends Controller {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-08-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-08-08
      */
     public function indexAction() {
         
@@ -76,7 +76,7 @@ class AuthController extends Controller {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-08-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-08-08
      */
     public function loginAction() {
 
@@ -93,7 +93,7 @@ class AuthController extends Controller {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-08-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-08-08
      */
     public function logoutAction() {
         $ue = $this->container->get($this->serviceUserEntity);
@@ -111,7 +111,7 @@ class AuthController extends Controller {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-08-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-08-08
      */
     public function passwordGrantAjaxAction(Request $request) {
 
@@ -157,7 +157,7 @@ class AuthController extends Controller {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-08-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-08-08
      */
     public function passwordGrantAction(Request $request) {
 
@@ -182,7 +182,7 @@ class AuthController extends Controller {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-08-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-08-08
      */
     public function checkAccessTokenAction() {
         $oar = $this->container->get($this->serviceOAuthRequestor);
@@ -199,7 +199,7 @@ class AuthController extends Controller {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-08-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-08-08
      */
     public function checkUserAction() {
         $ue = $this->container->get($this->serviceUserEntity);

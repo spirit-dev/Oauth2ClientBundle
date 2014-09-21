@@ -52,7 +52,7 @@ class OAuthUserGrants implements OAuthUserGrantsInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function setGrants($accessToken, $refreshToken, $scope, $expiresIn, $tokenType) {
 
@@ -74,7 +74,7 @@ class OAuthUserGrants implements OAuthUserGrantsInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function hasExpired() {
 
@@ -101,7 +101,7 @@ class OAuthUserGrants implements OAuthUserGrantsInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function getAccessToken() {
         
@@ -116,7 +116,7 @@ class OAuthUserGrants implements OAuthUserGrantsInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function getRefreshToken() {
         
@@ -131,7 +131,7 @@ class OAuthUserGrants implements OAuthUserGrantsInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function getDateOutcome() {
         $this->getSessionVars();
@@ -148,7 +148,7 @@ class OAuthUserGrants implements OAuthUserGrantsInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     private function setTimeout() {
 
@@ -162,7 +162,7 @@ class OAuthUserGrants implements OAuthUserGrantsInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     private function setSessionVars() {
         $_SESSION['oaug_access_token'] = $this->accessToken;
@@ -179,7 +179,7 @@ class OAuthUserGrants implements OAuthUserGrantsInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     private function getSessionVars() {
         if(!isset($_SESSION['oaug_access_token'])) {
@@ -238,7 +238,7 @@ class OAuthUserGrants implements OAuthUserGrantsInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function deleteSessionVars() {
         if(isset($_SESSION['oaug_access_token'])) {
@@ -276,7 +276,7 @@ class OAuthUserGrants implements OAuthUserGrantsInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function isValid() {
         $issue = true;

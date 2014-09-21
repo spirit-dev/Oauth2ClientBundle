@@ -36,7 +36,7 @@ interface OAuthUserGrantsInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function setGrants($accessToken, $refreshToken, $scope, $expiresIn, $tokenType);
 
@@ -46,7 +46,7 @@ interface OAuthUserGrantsInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function hasExpired();
 
@@ -56,7 +56,7 @@ interface OAuthUserGrantsInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function getAccessToken();
 
@@ -66,7 +66,7 @@ interface OAuthUserGrantsInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function getRefreshToken();
 
@@ -76,7 +76,7 @@ interface OAuthUserGrantsInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function getDateOutcome();
 
@@ -85,7 +85,7 @@ interface OAuthUserGrantsInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function deleteSessionVars();
 
@@ -95,7 +95,7 @@ interface OAuthUserGrantsInterface {
      *
      * @author Jean BORDAT <bordat.jean@gmail.com>
      * Date    2014-06-19
-     * Updated by Jean Bordat <jean.bordat@steria.com> the 2014-07-08
+     * Updated by Jean Bordat <bordat.jean@gmail.com> the 2014-07-08
      */
     public function isValid();
 }
